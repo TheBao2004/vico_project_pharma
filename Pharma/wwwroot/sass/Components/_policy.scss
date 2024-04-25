@@ -1,0 +1,20 @@
+
+@mixin policyNormal(){
+
+    .policy_pharma{
+        .item_policy_pharma{
+            p{
+                margin: 0;
+            }
+            p:first-child{
+                font-size: 15px;
+                font-weight: 600;
+            }
+            p:last-child{
+                margin-bottom: 0;
+                color: #76809B;
+            }
+        }
+    }
+
+}

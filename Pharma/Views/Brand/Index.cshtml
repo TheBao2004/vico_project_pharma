@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Pharma.Models.BrandModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="alert alert-info">
+    Danh sách
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Tạo mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="bg-info text-light">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slug)
+            </th>
+            <th width="20%">
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                <img src="~/uploads/@item.Image" width="30%"/>
+            </td>
+            <td>
+                    @if (item.Active)
+                    {
+                        <p class="text-success fw-bold">Đã kích hoạt</p>                        
+                    }else{
+                        <p class="text-danger fw-bold">Chưa kích hoạt</p>
+                    }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

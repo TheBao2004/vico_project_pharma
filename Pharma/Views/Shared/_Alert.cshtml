@@ -1,0 +1,14 @@
+@{
+
+    var success = ViewBag.Success;
+    var error = ViewBag.Error;
+
+}
+
+@if(success != null){
+    <div class="alert alert-success">@(success)</div>
+}
+
+@if(error != null){
+    <div class="alert alert-danger">@(error)</div>
+}

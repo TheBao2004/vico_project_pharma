@@ -1,0 +1,23 @@
+
+// Helpers
+@import "./Helpers/variable";
+
+
+
+// Components
+@import "./Components/btn";
+@import "./Components/product";
+@import "./Components/policy";
+
+// Layouts
+@import "./Layouts/header";
+@import "./Layouts/footer";
+
+
+// Pages
+@import "./Pages/Home";
+@import "./Pages/Category";
+@import "./Pages/Detail";
+@import "./Pages/Cart";
+@import "./Pages/Auth";
+@import "./Pages/Checkbill";

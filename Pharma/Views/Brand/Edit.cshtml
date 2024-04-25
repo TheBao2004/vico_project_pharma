@@ -1,0 +1,54 @@
+﻿@model Pharma.Models.BrandModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="alert alert-info">
+    Sửa @Model.Name
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form method="post" class="row mx-0" enctype="multipart/form-data">
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group col-5 mb-3">
+                <label asp-for="Name" class="control-label mb-2"></label>
+                <input asp-for="Name" class="form-control inputSlug" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mb-3">
+                <label asp-for="Slug" class="control-label mb-2"></label>
+                <input asp-for="Slug" class="form-control outputSlug" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+            <div class="form-check form-switch col-2" style="text-align: center;">
+                <input class="form-check-input" asp-for="Active" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                <label class="form-check-label" for="flexSwitchCheckChecked" asp-for="Active"></label>
+            </div>
+            <div class="form-group mb-3 col-10">
+                <label asp-for="Image" class="control-label mb-2"></label>
+                <input name="Anh" type="file" class="w-100" />
+                <input type="hidden" asp-for="Image"/>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="col-2 mb-3">
+                <img src="~/uploads/@Model.Image" width="40%"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-info py-0" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr/>
+
+<div>
+    <a class="btn btn-info" asp-action="Index">Danh sách</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,35 @@
+@model Pharma.ViewModels.BoxCommentViewModel
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg">
+    <form id="form_comment_detail_product" method="post" asp-action="Comment" class="modal-content">
+
+    <input type="hidden" asp-for="CommentParent.Id">
+
+    <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            @if(Model.CommentParent == null){
+                <span>Gửi bình luận của bạn</span>
+            }else{
+                <span>Trả lời @Model.CommentParent.User.Fullname</span>
+            }
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" asp-for="ProductId" >
+        <textarea id="textarea_comment_detail_product" asp-for="Comment" cols="30" rows="5" class="form-control"></textarea>
+        @* <span class="text-danger" asp-validation-for="Comment"></span> *@
+        <span class="text-danger" id="error_comment_detail_product"></span>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn text-light" style="background-color: #80BB35;">Gửi</button>
+    </div>
+    </form>
+</div>
+</div> 
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

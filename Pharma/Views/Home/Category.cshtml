@@ -1,0 +1,212 @@
+@using Pharma.Services
+
+@model Pharma.ViewModels.PageCategoryClient
+
+@{
+    ViewData["Title"] = "Category";
+}
+
+<div class="category">
+
+    <div class="container">
+        @if (Model.Category != null)
+        {
+            <h4>@Model.Category.Name</h4>
+        }
+        else
+        {
+            <h4>Tất cả sản phẩm</h4>
+        }
+
+        <div class="list_category row mx-0 row-cols-4">
+            @foreach (var x in Model.Categories)
+            {
+                <div class="item_category_div">
+                    <div class="item_category row mx-0">
+                        <div class="col-3">
+                            <img src="~/uploads/@x.category.Image" alt="">
+                        </div>
+                        <div class="col-9">
+                            @* <a href="">Hỗ trợ tiêu hóa</a> *@
+                            <a href="">@x.category.Name</a>
+                            <span>(@x.NumberProduct sản phẩm)</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="main_category row mx-0">
+
+            <div class="col-3" style="padding-left: 0;">
+
+                <form class="card filter_category" style="width: 18rem;">
+
+                    @if(Model.Category != null){
+                        <input type="hidden" name="slug" id="category_slug" value="@Model.Category.Slug"> 
+                    }
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <h5>Bộ lọc nâng cao</h5>
+                        </li>
+                        <li class="list-group-item">
+                            <h6>Chọn mức giá</h6>
+                            <div class="mb-1">
+                                <input type="checkbox" value="<1000000" name="filter_category_price">
+                                <label for="">Giá dưới 1.000.000đ</label>
+                            </div>
+                            <div class="mb-1">
+                                <input type="checkbox" value=">1000000 AND <1500000" name="filter_category_price">
+                                <label for="">1.000.000đ đến 1.500.000đ</label>
+                            </div>
+                            <div class="mb-1">
+                                <input type="checkbox" value=">1500000 AND <2000000" name="filter_category_price">
+                                <label for="">1.500.000đ đến 2.000.000đ</label>
+                            </div>
+                            <div class="mb-1">
+                                <input type="checkbox" value=">2000000 AND <2500000" name="filter_category_price">
+                                <label for="">2.000.000đ đến 2.500.000đ</label>
+                            </div>
+                            <div class="mb-1">
+                                <input type="checkbox" value=">2500000 AND <3000000" name="filter_category_price">
+                                <label for="">2.500.000đ đến 3.000.000đ</label>
+                            </div>
+                            <div class="mb-1">
+                                <input type="checkbox" value=">3000000" name="filter_category_price">
+                                <label for="">Giá trên 3.000.000đ</label>
+                            </div>
+                        </li>
+                        @* <li class="list-group-item">
+                        <h6>Chọn mức giá</h6>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        </li>
+                        <li class="list-group-item">
+                        <h6>Chọn mức giá</h6>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        <div class="mb-1">
+                        <input type="checkbox">
+                        <label for="">Giá dưới 1.000.000đ</label>
+                        </div>
+                        </li> *@
+                    </ul>
+                </form>
+
+            </div>
+
+            <div class="col-9 px-0">
+
+                <hr>
+
+                    @if(Model.Products.Count > 0){
+
+
+                <div class="list_product_category row mx-0 row-cols-4">
+                
+
+                            @foreach (var x in Model.Products)
+                    {
+
+                        int? Discount = x.Product.Discount;
+                        var Price = x.Product.Price;
+                        var khuyenMai = 0;
+                        if (Discount > 0)
+                        {
+                            khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                        }
+
+                        <div class="item_product_category">
+                            <div class="item_product_component">
+                                <div class="img_item_product_component">
+                                    @if (khuyenMai != 0)
+                                    {
+                                        <span class="smart_item_product_component">@khuyenMai %</span>
+                                    }
+                                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" />
+                                </div>
+                                <div class="content_item_product_component">
+                                    <p><span><a asp-action="Detail" asp-route-slug="@x.Product.Slug" class="text-dark text-decoration-none">@x.Product.Name</a></span></p>
+                                    <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                        <div>
+                                            @if (Discount > 0)
+                                            {
+                                                <span class="discount_item_product_component">@Discount?.ToString("N0") đ</span>
+                                                <span class="price_item_product_component">@Price.ToString("N0") đ</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="discount_item_product_component">@Price.ToString("N0") đ</span>
+                                            }
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-success add_to_cart_item_product" data-id="@x.Product.Id">
+                                                <i class="fa fa-cart-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+                    }
+
+
+                    @if(Model.Products.Count <= 0){
+                        <div class="alert alert-warning">
+                            Không có sản phẩm
+                        </div>
+                    }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

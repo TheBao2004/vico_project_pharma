@@ -1,0 +1,718 @@
+﻿@using Pharma.Services
+
+@model Pharma.ViewModels.PageHomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* Slide *@
+<div class="container">
+
+    <div class="slice_home">
+
+        <div><img src="~/images/slider_1.jpg" width="100%" alt=""></div>
+        <div><img src="~/images/slider_2.jpg" width="100%" alt=""></div>
+
+    </div>
+
+</div>
+
+
+@* Categoies home *@
+<div class="categories_home">
+    <div class="container">
+        <h4 class="text-center">Danh mục nổi bật</h4>
+        <div class="slide_categories">
+            @foreach (var cate in Model.Categories)
+            {
+                <div class="item_slide_categories">
+                    <img src="~/uploads/@cate.Category.Image" alt="">
+                    <a asp-action="Category" asp-route-slug="@cate.Category.Slug">@cate.Category.Name</a>
+                    <p>(@cate.NumberProduct sản phẩm)</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@* Deal and Voucher *@
+<div class="deal_voucher_home">
+
+    <div class="container">
+
+        <div class="row mx-0">
+            <div class="deal_home col-10">
+
+                <div class="top_deal_home row mx-0 row-cols-2">
+                    <div class="top_deal_home_1">
+                        <h2>Săn deal giá hời</h2>
+                        <p>Hơn 50 deal giá hời đang chờ đón bạn đó!</p>
+                    </div>
+                    <div class="top_deal_home_2">
+                        <a href="">
+                            <span>Xem thêm</span>
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bottom_deal_home row mx-0">
+                    <div class="bottom_deal_home_1 col-3">
+                        <div>
+                            <p>Kết thúc trong:</p>
+                        </div>  
+                    </div>
+                    <div class="bottom_deal_home_2 col-9">
+                        <div class="list_product_deal_home owl-carousel">
+                            @foreach (var proBanner in Model.ProductBanner)
+                            {
+
+                                int? Discount = proBanner.Product.Discount;
+                                var Price = proBanner.Product.Price;
+                                var khuyenMai = 0;
+                                if(Discount > 0){
+                                    khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                                }
+
+                                <div class="item_product_component">
+                                    <div class="img_item_product_component">
+                                        @if(khuyenMai != 0){
+                                            <span class="smart_item_product_component">@khuyenMai %</span>
+                                        }
+                                        <img src="~/uploads/@proBanner.Thumbnail" />
+                                    </div>
+                                    <div class="content_item_product_component">
+                                        <p><span><a asp-action="Detail" asp-route-slug="@proBanner.Product.Slug" class="text-dark text-decoration-none">@proBanner.Product.Name</a></span></p>
+                                        <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                            <div>
+
+                                                @if(Discount > 0){
+                                                <span class="discount_item_product_component">@Discount đ</span>
+                                                <span class="price_item_product_component">@Price đ</span>
+                                                }else{
+                                                <span class="discount_item_product_component">@Price đ</span>
+                                                }
+ 
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="voucher_home col-2">
+                <div class="title_voucher_home">
+                    <h3>Voucher</h3>
+                </div>
+                <div class="list_voucher_home">
+                    @foreach (var x in Model.Vouchers)
+                    {
+                        <div class="item_voucher_home">
+                            <div class="item_voucher_home_1">
+                                <p>@x.Code</p>
+                                <p>@x.Name</p>
+                            </div>
+                            <div class="item_voucher_home_2">
+                                <div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+@* Tab *@
+<div class="tab_home">
+    <div class="container">
+        <div class="title_tab_home">
+            <h4 class="text-center">@Model.ProductForObject.Category.Name</h4>
+            <div class="list_tab_home">
+                <ul class="nav justify-content-center">
+                    @* <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Trẻ em</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mẹ và bé</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Người cao tuổi</a>
+                    </li> *@
+
+                    @foreach(var x in Model.ProductForObject.Keywords){
+                        <li class="nav-item">
+                            <a data-keyword="@x.Keyword" class="product_home_keyword_1 nav-link">@x.Name</a>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="list_product_tab_home row row-cols-5 mx-0">
+
+            @* @for (var x = 0; x < 10; x++)
+            {
+                <div class="item_product_tab_home">
+                    <div class="item_product_component">
+                        <div class="img_item_product_component">
+                            <span class="smart_item_product_component">30%</span>
+                            <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" />
+                        </div>
+                        <div class="content_item_product_component">
+                            <p><span>Xịt khử mùi Romano Classic ngăn mùi, kháng khuẩn chai 150ml</span></p>
+                            <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                <div>
+                                    <span class="discount_item_product_component">100.000đ</span>
+                                    <span class="price_item_product_component">140.000đ</span>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success">
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            } *@
+
+
+             @foreach (var proBanner in Model.ProductForObject.Products)
+                            {
+
+                                int? Discount = proBanner.Product.Discount;
+                                var Price = proBanner.Product.Price;
+                                var khuyenMai = 0;
+                                if(Discount > 0){
+                                    khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                                }
+ <div class="item_product_tab_home">
+                                <div class="item_product_component">
+                                    <div class="img_item_product_component">
+                                        @if(khuyenMai != 0){
+                                            <span class="smart_item_product_component">@khuyenMai %</span>
+                                        }
+                                        <img src="~/uploads/@proBanner.Thumbnail" />
+                                    </div>
+                                    <div class="content_item_product_component">
+                                        <p><span><a asp-action="Detail" asp-route-slug="@proBanner.Product.Slug" class="text-dark text-decoration-none">@proBanner.Product.Name</a></span></p>
+                                        <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                            <div>
+
+                                                @if(Discount > 0){
+                                                <span class="discount_item_product_component">@Discount đ</span>
+                                                <span class="price_item_product_component">@Price đ</span>
+                                                }else{
+                                                <span class="discount_item_product_component">@Price đ</span>
+                                                }
+ 
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+ </div>
+                            }
+
+        </div>
+
+    </div>
+</div>
+
+
+@* About *@
+<div class="about_home">
+
+    <div class="container">
+
+        <div class="row mx-0 row-cols-2">
+
+            <div class="img_about_home">
+                <img src="~/images/img-section-about.png" alt="">
+            </div>
+
+            <div class="content_about_home">
+
+                <div class="content_about_home_div">
+                    <h4>VỀ CHÚNG TÔI</h4>
+                    <h2>Giới thiệu về NDPharma</h2>
+
+                    <p>NDPharma luôn hướng đến mục tiêu nâng cao chất lượng chăm sóc sức khỏe cho khách hàng. Điều này,
+                        trước đây vốn chỉ nằm trong ý tưởng của ông Chris Blank – nhà sáng lập công ty, một dược sỹ
+                        người Mỹ làm việc nhiều năm tại Việt Nam. Với niềm đam mê và sự sáng tạo của mình, ông Chris
+                        Blank đã thành lập nên NDPharma và mang đến những trải nghiệm tốt nhất cho khách hàng.</p>
+
+                    <p>Hệ thống NDPharma luôn mong muốn được chăm sóc, phục vụ sức khỏe cộng đồng với chất lượng tốt
+                        nhất và giá cả hợp lý.</p>
+
+                    <div class="icon_about_home row mx-0 row-cols-2">
+                        <div>
+                            <img src="~/images/icon_content_about_1.png" alt="">
+                            <span>Khách hàng là trọng tâm</span>
+                        </div>
+                        <div>
+                            <img src="~/images/icon_content_about_1.png" alt="">
+                            <span>Chất lượng tốt</span>
+                        </div>
+                        <div>
+                            <img src="~/images/icon_content_about_1.png" alt="">
+                            <span>Uy tín hàng đầu</span>
+                        </div>
+                        <div>
+                            <img src="~/images/icon_content_about_1.png" alt="">
+                            <span>Tư vấn tận tâm</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@* Group *@
+<div class="group_home">
+
+    <div class="container">
+
+        <div class="row mx-0">
+            <div class=" col-3">
+                <div class="group_left">
+
+                    <h4>Sữa bột</h4>
+                    @* <h4>Sữa bột</h4> *@
+
+                    <div class="list_product_group_left owl-carousel mt-3">
+
+                        @foreach (var proBanner in Model.ProductSuaBot)
+                        {
+
+                                  int? Discount = proBanner.Product.Discount;
+                                var Price = proBanner.Product.Price;
+                                var khuyenMai = 0;
+                                if(Discount > 0){
+                                    khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                                }
+
+                            <div class="item_product_tab_home">
+                                <div class="item_product_component row mx-0">
+                                    <div class="img_item_product_component col-5">
+                                        @* <span class="smart_item_product_component">30%</span>
+                                        <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" /> *@
+                                             @if(khuyenMai != 0){
+                                            <span class="smart_item_product_component">@khuyenMai %</span>
+                                        }
+                                        <img src="~/uploads/@proBanner.Thumbnail" />
+                                    </div>
+                                    <div class="content_item_product_component col-7">
+                                        @* <p><span>Xịt khử mùi Romano Classic ngăn mùi, kháng khuẩn chai 150ml</span></p> *@
+                                        <p><span><a asp-action="Detail" asp-route-slug="@proBanner.Product.Slug" class="text-dark text-decoration-none">@proBanner.Product.Name</a></span></p>
+                                        <div class="sub_content_item_product_component row mx-0">
+                                            <div class="col-8">
+                                                @* <span class="discount_item_product_component">100.000đ</span>
+                                                <span class="price_item_product_component">140.000đ</span> *@
+                                                  @if(Discount > 0){
+                                                <span class="discount_item_product_component">@Discount đ</span>
+                                                <span class="price_item_product_component">@Price đ</span>
+                                                }else{
+                                                <span class="discount_item_product_component">@Price đ</span>
+                                                }
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <h4>Thương hiệu</h4>
+
+                    <div class="list_product_group_left owl-carousel mt-3">
+
+                        @foreach (var x in Model.Brands)
+                        {
+                            <div class="item_brand_group_left row row-cols-2 mx-0">
+                                <div>
+                                    <div>
+                                        <img src="~/uploads/@x.Image" alt="" width="100%">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <img src="~/uploads/@x.Image" alt="" width="100%">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="group_right col-9">
+
+                <div class="title_group_right py-3 row mx-0">
+                    <div class="col-5">
+                        <h4><a href="">Sinh lý - Nội tiết tố</a></h4>
+                    </div>
+                    <div class="col-7" style="text-align: end;">
+                        <a href="" class="goto_title_group_right">Xem thêm <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="list_product_group_right owl-carousel">
+
+                    @foreach (var proBanner in Model.ProductSinhLy)
+                    {
+
+        int? Discount = proBanner.Product.Discount;
+                                var Price = proBanner.Product.Price;
+                                var khuyenMai = 0;
+                                if(Discount > 0){
+                                    khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                                }
+
+                        <div class="item_product_group_right">
+                            <div class="item_product_component">
+                                <div class="img_item_product_component">
+                                    @* <span class="smart_item_product_component">30%</span>
+                                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" /> *@
+                                          @if(khuyenMai != 0){
+                                            <span class="smart_item_product_component">@khuyenMai %</span>
+                                        }
+                                        <img src="~/uploads/@proBanner.Thumbnail" />
+                                </div>
+                                <div class="content_item_product_component">
+                                  <p><span><a asp-action="Detail" asp-route-slug="@proBanner.Product.Slug" class="text-dark text-decoration-none">@proBanner.Product.Name</a></span></p>
+                                        <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                            <div>
+
+                                                @if(Discount > 0){
+                                                <span class="discount_item_product_component">@Discount đ</span>
+                                                <span class="price_item_product_component">@Price đ</span>
+                                                }else{
+                                                <span class="discount_item_product_component">@Price đ</span>
+                                                }
+ 
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+
+
+                <div class="title_group_right py-3 row mx-0">
+                    <div class="col-5">
+                        <h4><a href="">@Model.ProductSuggest.Category.Name</a></h4>
+                    </div>
+                    <div class="col-7" style="text-align: end;">
+                        <ul class="nav justify-content-end">
+                            @* <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Sản phẩm mới</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Tìm kiếm nhiều</a>
+                            </li> *@
+                            @foreach(var x in Model.ProductSuggest.Keywords){
+                            <li class="nav-item">
+                                <a class="nav-link product_home_keyword_2" data-keyword="@x.Keyword">@x.Name</a>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="list_product_group_right_other list_product_group_right_other_1 row mx-0 row-cols-4">
+
+                    @* @for (var x = 0; x < 10; x++)
+                    {
+                        <div class="item_product_group_right">
+                            <div class="item_product_component">
+                                <div class="img_item_product_component">
+                                    <span class="smart_item_product_component">30%</span>
+                                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" />
+                                </div>
+                                <div class="content_item_product_component">
+                                    <p><span>Xịt khử mùi Romano Classic ngăn mùi, kháng khuẩn chai 150ml</span></p>
+                                    <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                        <div>
+                                            <span class="discount_item_product_component">100.000đ</span>
+                                            <span class="price_item_product_component">140.000đ</span>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-success">
+                                                <i class="fa fa-cart-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } *@
+
+
+                       @foreach (var proBanner in Model.ProductSuggest.Products)
+                    {
+
+        int? Discount = proBanner.Product.Discount;
+                                var Price = proBanner.Product.Price;
+                                var khuyenMai = 0;
+                                if(Discount > 0){
+                                    khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                                }
+
+                        <div class="item_product_group_right">
+                            <div class="item_product_component">
+                                <div class="img_item_product_component">
+                                    @* <span class="smart_item_product_component">30%</span>
+                                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" /> *@
+                                          @if(khuyenMai != 0){
+                                            <span class="smart_item_product_component">@khuyenMai %</span>
+                                        }
+                                        <img src="~/uploads/@proBanner.Thumbnail" />
+                                </div>
+                                <div class="content_item_product_component">
+                                  <p><span><a asp-action="Detail" asp-route-slug="@proBanner.Product.Slug" class="text-dark text-decoration-none">@proBanner.Product.Name</a></span></p>
+                                        <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                            <div>
+
+                                                @if(Discount > 0){
+                                                <span class="discount_item_product_component">@Discount đ</span>
+                                                <span class="price_item_product_component">@Price đ</span>
+                                                }else{
+                                                <span class="discount_item_product_component">@Price đ</span>
+                                                }
+ 
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@* Medicine *@
+<div class="medicine_home">
+
+    <div class="container">
+
+        <div class="row row_medicine_home">
+
+            <div class="col-12">
+                <p>Chuyên gia tư vấn</p>
+                <h2>Tìm thuốc theo bệnh</h2>
+                <a href="" class="btn_medicine_home">Xem thêm <i class="fa fa-arrow-right"></i></a>
+            </div>
+
+            <div class="list_medicine_home col-12 row mx-0 row-cols-4">
+                @for (var x = 0; x <= 3; x++)
+                {
+                    <div class="item_medicine_home">
+                       <div class="item_medicine_home_div row mx-0">
+                         <div class="col-4">
+                            <img src="~/images/icon_find_medicine_1.png" width="100%" alt="">
+                        </div>
+                        <div class="col-8">
+                            <a>Bệnh về dạ dày</a>
+                        </div>
+                       </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@* Group *@
+<div class="group_home">
+
+    <div class="container">
+
+        <div class="row mx-0">
+
+            <div class="group_right col-9">
+
+                <div class="title_group_right py-3 row mx-0">
+                    <div class="col-5">
+                        <h4><a href="">@Model.ProductDuocPham.Category.Name</a></h4>
+                    </div>
+                    <div class="col-7" style="text-align: end;">
+                        <ul class="nav justify-content-end">
+                            @* <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Chăm sóc da mặt</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Chăm sóc cơ thể</a>
+                            </li> *@
+
+                            @foreach(var x in Model.ProductDuocPham.Keywords){
+
+                            <li class="nav-item">
+                                <a class="nav-link product_home_keyword_3" data-keyword="@x.Keyword">@x.Name</a>
+                            </li>
+
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="list_product_group_right_other list_product_group_right_other_2 row mx-0 row-cols-4">
+
+                    @* @for (var x = 0; x < 8; x++)
+                    {
+                        <div class="item_product_group_right">
+                            <div class="item_product_component">
+                                <div class="img_item_product_component">
+                                    <span class="smart_item_product_component">30%</span>
+                                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" />
+                                </div>
+                                <div class="content_item_product_component">
+                                    <p><span>Xịt khử mùi Romano Classic ngăn mùi, kháng khuẩn chai 150ml</span></p>
+                                    <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                        <div>
+                                            <span class="discount_item_product_component">100.000đ</span>
+                                            <span class="price_item_product_component">140.000đ</span>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-success">
+                                                <i class="fa fa-cart-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } *@
+
+                         @foreach (var proBanner in Model.ProductDuocPham.Products)
+                    {
+
+        int? Discount = proBanner.Product.Discount;
+                                var Price = proBanner.Product.Price;
+                                var khuyenMai = 0;
+                                if(Discount > 0){
+                                    khuyenMai = Helper.PhanTramGiam(Discount ?? 0, Price);
+                                }
+
+                        <div class="item_product_group_right">
+                            <div class="item_product_component">
+                                <div class="img_item_product_component">
+                                    @* <span class="smart_item_product_component">30%</span>
+                                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" /> *@
+                                          @if(khuyenMai != 0){
+                                            <span class="smart_item_product_component">@khuyenMai %</span>
+                                        }
+                                        <img src="~/uploads/@proBanner.Thumbnail" />
+                                </div>
+                                <div class="content_item_product_component">
+                                  <p><span><a asp-action="Detail" asp-route-slug="@proBanner.Product.Slug" class="text-dark text-decoration-none">@proBanner.Product.Name</a></span></p>
+                                        <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                            <div>
+
+                                                @if(Discount > 0){
+                                                <span class="discount_item_product_component">@Discount đ</span>
+                                                <span class="price_item_product_component">@Price đ</span>
+                                                }else{
+                                                <span class="discount_item_product_component">@Price đ</span>
+                                                }
+ 
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-success">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+
+
+            </div>
+
+            <div class=" col-3">
+
+                <img src="~/images/img_col1.png" width="100%" class="mb-3" alt="">
+                <img src="~/images/img_col2.png" width="100%" class="mb-3" alt="">
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

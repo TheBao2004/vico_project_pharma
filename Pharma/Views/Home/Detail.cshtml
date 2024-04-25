@@ -1,0 +1,530 @@
+@using Pharma.Services
+
+@model Pharma.ViewModels.PageProductViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+
+    int sttImg = 0;
+    int sttBtn = 0;
+
+}
+
+<div class="detail_product">
+
+    <div class="container">
+
+        <div class="row">
+
+            @{
+                var arrImg = Helper.StringToArray(Model.Product.Images, ",");
+            }
+
+            <div class="col-5 img_detail_product">
+
+                <div class="list_img_detail_product owl-carousel">
+                    @* <div class="item_img_detail_product" data-hash="1">
+                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" alt="" width="100%">
+                    </div>
+                    <div class="item_img_detail_product" data-hash="2">
+                    <img src="~/images/sp4-2-2b93d951-fbf7-4e63-b2be-d6.png" alt="" width="100%">
+                    </div>
+                    <div class="item_img_detail_product" data-hash="3">
+                    <img src="~/images/sp4-3-7c244a8b-8c5e-4d78-9c50-7d.png" alt="" width="100%">
+                    </div> *@
+                    @foreach (var x in arrImg)
+                    {
+                        <div class="item_img_detail_product" data-hash="@(++sttImg)">
+                            <img src="~/uploads/@x" alt="" width="100%">
+                        </div>
+                    }
+                </div>
+
+                <div class="list_btn_detail_product">
+                    @* <div class="item_btn_detail_product_div">
+                    <a class="item_btn_detail_product" href="#1">
+                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" alt="" width="100%">
+                    </a>
+                    </div>
+                    <div class="item_btn_detail_product_div">
+                    <a class="item_btn_detail_product" href="#2">
+                    <img src="~/images/sp4-2-2b93d951-fbf7-4e63-b2be-d6.png" alt="" width="100%">
+                    </a>
+                    </div>
+
+                    <div class="item_btn_detail_product_div">
+                    <a class="item_btn_detail_product" href="#3">
+                    <img src="~/images/sp4-3-7c244a8b-8c5e-4d78-9c50-7d.png" alt="" width="100%">
+                    </a>
+                    </div> *@
+
+                    @foreach (var x in arrImg)
+                    {
+                        <div class="item_btn_detail_product_div">
+                            <a class="item_btn_detail_product" href="#@(++sttBtn)">
+                                <img src="~/uploads/@x" alt="" width="100%">
+                            </a>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            <div class="col-7 infor_detail_product">
+
+                <h3>@Model.Product.Name</h3>
+
+                <div class="brand_detail_product">
+                    <p>Mã sản phẩm: <span>#@Model.Product.Id</span></p>
+                    <p>Thương hiệu: <span>@Model.Product.Brand.Name</span> <span class="text-dark">|</span> Tình trạng:
+                        <span>@Model.Product.Quantity</span>
+                    </p>
+                </div>
+
+                <div class="price_detail_product">
+                    @{
+                        int Discount = (int)Model.Product.Discount;
+                        int Price = Model.Product.Price;
+                    }
+                    @if (Discount > 0)
+                    {
+                        <h2>@Discount.ToString("N0") đ</h2>
+                        <p>@Price.ToString("N0") đ</p>
+                    }
+                    else
+                    {
+                        <h2>@Price đ</h2>
+                    }
+
+                </div>
+                <hr>
+
+                <div class="voucher_detail_product">
+                    <p>Mã giảm giá:
+                    
+                    @* <span>Giảm 50%</span> <span>Giảm 15%</span> <span>Giảm 10%</span> *@
+                    
+                    @foreach(var vou in Model.Vouchers){
+                        <span>@vou.Name</span>
+                    }
+                    
+                    </p>
+               
+                </div>
+
+                <hr>
+
+                <form action="" id="form_detail_product">
+
+                    <div class="form_quantity_detail_product">
+                        <span>Số lượng: </span>
+                        <div class="input_quantity_detail_product">
+                            <span id="minus_detail_product">-</span>
+                            <input id="quantity_detail_product" type="text" value="1" name="quantity">
+                            <input id="pro_id_detail_product" type="hidden" name="pro_id" value="@Model.Product.Id">
+                            <span id="add_detail_product">+</span>
+                        </div>
+                    </div>
+
+                    <div class="btn_form_detail_product">
+                        <button type="submit" id="add_to_cart">Thêm vào giỏ hàng</button>
+                        <a href="">Mua hàng</a>
+                    </div>
+
+                </form>
+
+                <hr>
+
+                @Html.Partial("_Policy")
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-3 menu_desc_detail_product">
+
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="" class="active">
+                                Mổ tả sản phẩm
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                Thành phần
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                Hướng dẫn sử dụng
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                Lưu ý
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                Hướng dẫn bảo quản
+                            </a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <a href="">
+                                Quy cách đóng gói
+                            </a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <a href="">
+                                Đánh giá sản phẩm
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-9 content_desc_detail_product">
+
+                <h3>
+                    Mổ tả sản phẩm
+                </h3>
+                <p>
+                    @Model.Product.Description
+                </p>
+
+                <h3>
+                    Thành phần
+                </h3>
+                <p>
+                    @Model.Product.Description
+                </p>
+
+                <h3>
+                    Hướng dẫn sử dụng
+                </h3>
+                <p>
+                    @Model.Product.Ingredient
+                </p>
+
+                <h3>
+                    Lưu ý
+                </h3>
+                <p>
+                    @Model.Product.Guide
+                </p>
+
+                <h3>
+                    Hướng dẫn bảo quản
+                </h3>
+                <p>
+                    @Model.Product.Note
+                </p>
+
+                <h3>
+                    Quy cách đóng gói
+                </h3>
+                <p>
+                    @Model.Product.Preserve
+                </p>
+
+                <h3>
+                    Đóng gói
+                </h3>
+                <p>
+                    @Model.Product.Pack
+                </p>
+
+                <h3>
+                    Bình luận sản phẩm
+                </h3>
+
+                @await Component.InvokeAsync("CommentComponent", new {ProId = Model.Product.Id, Id = Model.CommentId})
+
+                <div class="comment_detail_product">
+
+                    <div class="top_comment_detail_product row mx-0 p-4">
+
+                        <div class="col-3 top_comment_detail_product_1">
+                            <h2>5/5</h2>
+                            <p>(1 đánh giá)</p>
+                            @if(User.Identity.IsAuthenticated){
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Gửi đánh giá của bạn</button>
+                            }else{
+                                <button onclick="return alert(`Đăng nhập để đánh giá`)">Gửi đánh giá của bạn</button>
+                            }
+                        </div>
+
+                        <div class="col-9 top_comment_detail_product_2">
+                            <ul class="nav">
+
+                                <li class="nav-item active">
+                                    <a class="nav-link" aria-current="page" href="#">Tất cả</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">5 Điểm (0)</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">4 Điểm (0)</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">3 Điểm (0)</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">2 Điểm (0)</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">1 Điểm (0)</a>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="bottom_comment_detail_product p-4">
+
+                        @if(Model.Comments.Count > 0){
+                            var sttReply = -1;
+                            @foreach(var c in Model.Comments){
+
+                                ++sttReply;
+
+                                var form_reply = Convert.ToString(sttReply) + "_form_reply";
+                                var open_reply = Convert.ToString(sttReply) + "_open_reply";
+                                var close_reply = Convert.ToString(sttReply) + "_close_reply";
+                                var content_reply = Convert.ToString(sttReply) + "_content_reply";
+                                var error_reply = Convert.ToString(sttReply) + "_error_reply";
+
+                                <div class="parent_comment_detail_product">
+                                    @* <h5>Tên người</h5> *@
+                                    <h5>@c.Comment.User.Fullname</h5>
+                                    @* <p>
+                                        Bình luận người dùng
+                                    </p> *@
+                                    <p>
+                                        @c.Comment.Comment
+                                    </p>
+                                    <div class="btn_comment_detail_product">
+                                        @* <span class="reply_comment_detail_product"><a asp-action="Detail" asp-route-slug="@Model.Product.Slug" asp-route-parent="@c.Id" class="text-decoration-none text-dark">Gửi trả lời</a></span> *@
+                                        @if(User.Identity.IsAuthenticated){
+                                            <span class="@(open_reply) reply_comment_detail_product">Gửi trả lời</span>
+                                        }else{
+                                            <span onclick="return alert('Vui lòng đăng nhập')">Gửi trả lời</span>
+                                        }
+                                        <span><i class="fa fa-thumbs-up"></i> Hữu tích</span>
+                                        <span><i class="fa fa-exclamation-triangle"></i> Báo cáo sai phạm</span>
+                                        @* <span>14:41 03/04/2024</span> *@
+                                        <span>@c.Comment.Created.ToString("HH:mm dd/MM/yyy")</span>
+                                    </div>
+                                    <form method="post" asp-action="CreateCommentChild" class="@(form_reply) form_reply_detail_product pt-3 row mx-0">
+                                        <input type="hidden" name="pro_id" value="@Model.Product.Id">
+                                        <input type="hidden" name="pro_slug" value="@Model.Product.Slug">
+                                        <input type="hidden" name="parent_id" value="@c.Comment.Id">
+                                        <div class="mb-3 col-10">
+                                            <textarea name="reply" cols="30" rows="2" class="@(content_reply) form-control">
+
+                                            </textarea>
+                                            <span class="@(error_reply) text-danger mt-1 d-inline-block"></span>
+                                        </div>
+                                        <div class="col-1 mb-3 d-flex justify-content-between align-items-center" style="">
+                                            <button type="submit" class="btn btn-success">Gửi</button>
+                                        </div>
+                                         <div class="col-1 mb-3 d-flex justify-content-between align-items-center">
+                                            <button type="button" class="@(close_reply) btn btn-danger">Đóng</button>
+                                        </div>
+                                    </form>
+
+                                    @if(c.Comments.Count > 0){
+
+                                        @foreach(var chi in c.Comments){
+                                            <div class="child_comment_detail_product">
+
+                                                @* <h6>Tên người con</h6> *@
+                                                <h6>@chi.User.Fullname</h6>
+                                                <p>
+                                                    @chi.Comment
+                                                </p>
+                                                <div class="btn_comment_detail_product">
+                                                    <span><i class="fa fa-thumbs-up"></i> Hữu tích</span>
+                                                    <span><i class="fa fa-exclamation-triangle"></i> Báo cáo sai phạm</span>
+                                                    <span>14:41 03/04/2024</span>
+                                                </div>
+
+                                            </div>
+                                        }
+
+                                    }
+
+                                </div>
+
+                            }
+
+                        }else{
+
+                            <div class="alert alert-warning"> 
+                                Không có bình luận nào
+                            </div>
+
+                        }
+
+                  
+
+                        @* <div class="parent_comment_detail_product">
+                            <h5>Tên người</h5>
+                            <p>
+                                Bình luận người dùng
+                            </p>
+                            <div class="btn_comment_detail_product">
+                                <span>Gửi trả lời</span>
+                                <span><i class="fa fa-thumbs-up"></i> Hữu tích</span>
+                                <span><i class="fa fa-exclamation-triangle"></i> Báo cáo sai phạm</span>
+                                <span>14:41 03/04/2024</span>
+                            </div>
+
+                            <div class="child_comment_detail_product">
+
+                                <h6>Tên người con</h6>
+                                    <p>
+                                        Bình luận người con dùng
+                                    </p>
+                                    <div class="btn_comment_detail_product">
+                                        <span><i class="fa fa-thumbs-up"></i> Hữu tích</span>
+                                        <span><i class="fa fa-exclamation-triangle"></i> Báo cáo sai phạm</span>
+                                        <span>14:41 03/04/2024</span>
+                                    </div>
+                            </div>
+
+                        </div> *@
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <h3 class="title_product_detail_product">Sản phẩm liên quan</h3>
+
+        @if (Model.ProductCategory.Count > 0)
+        {
+
+            <div class="list_product_detail_product owl-carousel">
+
+                @foreach (var x in Model.ProductCategory)
+                {
+
+                    int? DiscountList1 = x.Discount;
+                    var PriceList1 = x.Price;
+                    var khuyenMai = 0;
+                    if (Discount > 0)
+                    {
+                        khuyenMai = Helper.PhanTramGiam(DiscountList1 ?? 0, PriceList1);
+                    }
+
+                    <div class="item_product_detail_product">
+                        <div class="item_product_component">
+                            <div class="img_item_product_component">
+                                @if (khuyenMai != 0)
+                                {
+                                    <span class="smart_item_product_component">@khuyenMai %</span>
+                                }
+                                <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" />
+                            </div>
+                            <div class="content_item_product_component">
+                                <p><span><a asp-action="Detail" asp-route-slug="@x.Slug"
+                                            class="text-dark text-decoration-none">@x.Name</a></span></p>
+                                <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                    <div>
+                                        @if (DiscountList1 > 0)
+                                        {
+                                            <span class="discount_item_product_component">@DiscountList1 đ</span>
+                                            <span class="price_item_product_component">@PriceList1 đ</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="discount_item_product_component">@PriceList1 đ</span>
+                                        }
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-success">
+                                            <i class="fa fa-cart-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+        }
+        else
+        {
+
+            <div class="alert alert-warning">Không có sản phẩm</div>
+
+        }
+
+
+
+    </div>
+
+    <div class="container">
+
+        <h3 class="title_product_detail_product">Sản phẩm đã xem</h3>
+
+        <div class="list_product_detail_product owl-carousel">
+
+            @for (var x = 0; x < 10; x++)
+            {
+                <div class="item_product_detail_product">
+                    <div class="item_product_component">
+                        <div class="img_item_product_component">
+                            <span class="smart_item_product_component">30%</span>
+                            <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" />
+                        </div>
+                        <div class="content_item_product_component">
+                            <p><span>Xịt khử mùi Romano Classic ngăn mùi, kháng khuẩn chai 150ml</span></p>
+                            <div class="sub_content_item_product_component row mx-0 row-cols-2">
+                                <div>
+                                    <span class="discount_item_product_component">100.000đ</span>
+                                    <span class="price_item_product_component">140.000đ</span>
+                                </div>
+                                <div>
+                                    <button class="btn btn-success">
+                                        <i class="fa fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>

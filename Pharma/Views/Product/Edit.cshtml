@@ -1,0 +1,150 @@
+@model Pharma.ViewModels.AdminCreateProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="alert alert-info">
+	Sửa
+</div>
+
+
+<form method="post" class="row mx-0" enctype="multipart/form-data">
+
+	<input type="hidden" asp-for="Product.Id">
+	<input type="hidden" asp-for="Product.Images">
+
+	<div class="mb-3 col-4">
+		<label class="mb-2" asp-for="Product.Name"></label>
+		<input asp-for="Product.Name" class="form-control inputSlug" />
+		<span class="text-danger" asp-validation-for="Product.Name"></span>
+	</div>
+
+
+	<div class="mb-3 col-4">
+		<label class="mb-2" asp-for="Product.Slug"></label>
+		<input asp-for="Product.Slug" class="outputSlug form-control" />
+		<span class="text-danger" asp-validation-for="Product.Slug"></span>
+	</div>
+
+	 <div class="mb-3 col-3">
+	<label class="mb-2" asp-for="Quantity"></label>
+	<input asp-for="Quantity" class="form-control" />
+	<span class="text-danger" asp-validation-for="Product.Quantity"></span>
+	</div>
+
+	<div class="form-check form-switch col-1" style="text-align: center;">
+		<input class="form-check-input" asp-for="Product.Active" type="checkbox" role="switch"
+			id="flexSwitchCheckChecked">
+		<label class="form-check-label" for="flexSwitchCheckChecked" asp-for="Product.Active"></label>
+	</div>
+
+
+
+
+	<div class="mb-3 col-6">
+		<label class="mb-2" asp-for="Price"></label>
+		<input asp-for="Price" class="form-control" />
+		<span class="text-danger" asp-validation-for="Product.Price"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label class="mb-2" asp-for="Discount"></label>
+		<input asp-for="Discount" class="form-control" />
+		<span class="text-danger" asp-validation-for="Product.Discount"></span>
+	</div>
+
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.Description"></label>
+		<textarea class="form-control" asp-for="Product.Description" id="" cols="30" rows="3"></textarea>
+		<span class="text-danger" asp-validation-for="Product.Description"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.Ingredient"></label>
+		<textarea class="form-control" asp-for="Product.Ingredient" id="" cols="30" rows="3"></textarea>
+		<span class="text-danger" asp-validation-for="Product.Ingredient"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.Guide"></label>
+		<textarea class="form-control" asp-for="Product.Guide" id="" cols="30" rows="3"></textarea>
+		<span class="text-danger" asp-validation-for="Product.Guide"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.Note"></label>
+		<textarea class="form-control" asp-for="Product.Note" id="" cols="30" rows="3"></textarea>
+		<span class="text-danger" asp-validation-for="Product.Note"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.Preserve"></label>
+		<textarea class="form-control" asp-for="Product.Preserve" id="" cols="30" rows="3"></textarea>
+		<span class="text-danger" asp-validation-for="Product.Preserve"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.Pack"></label>
+		<textarea class="form-control" asp-for="Product.Pack" id="" cols="30" rows="3"></textarea>
+		<span class="text-danger" asp-validation-for="Product.Pack"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.CategoryId"></label>
+		<select class="form-select" asp-for="Product.CategoryId">
+			<option value="">--------</option>
+			@foreach(var x in Model.Categories){
+				<option value="@x.Id">@x.Name</option>
+			}
+		</select>
+		<span class="text-danger" asp-validation-for="Product.CategoryId"></span>
+	</div>
+
+	<div class="mb-3 col-6">
+		<label for="" class="mb-2" asp-for="Product.BrandId"></label>
+		<select class="form-select" asp-for="Product.BrandId">
+			<option value="">--------</option>
+			@foreach(var x in Model.Brands){
+				<option value="@x.Id">@x.Name</option>
+			}
+		</select>
+		<span class="text-danger" asp-validation-for="Product.BrandId"></span>
+	</div>
+
+	<input type="hidden" asp-for="Product.Keywords" value="@Model.Product.Keywords">
+
+	<label asp-for="Product.Keywords" class="mb-2"></label>
+	<div class="col-12 mb-3">
+
+		@foreach(var x in Model.Keywords){
+
+			string[] arrKW = Model.Product.Keywords.Split(",");
+
+			<div class="form-check form-check-inline">
+			<input class="form-check-input" @(arrKW.Contains(x.Keyword) ? "checked" : false) name="arrKeyword[]" type="checkbox" id="inlineCheckbox1" value="@x.Keyword">
+			<label class="form-check-label" style="display: inline-block; margin-left: 10px;" for="inlineCheckbox1">@x.Name</label>
+			</div>
+		}
+
+	</div>
+
+
+	<div class="mb-3 col-12">
+		<input type="submit" class="btn btn-info py-0" value="Sửa">
+	</div>
+
+<input type="text" data-pro_id="@Model.Product.Id" id="imageProduct">
+
+
+</form>
+
+<hr>
+
+<a asp-action="Index" id="btnEditProduct" class="btn btn-info">Danh sách</a>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,41 @@
+@model Pharma.ViewModels.PageInfoViewModel
+
+@{
+    ViewData["Title"] = "Infor";
+}
+
+
+<div class="account">
+
+    <div class="container">
+
+        <div class="row mx-0">
+
+            <div class="col-3">
+
+                @await Component.InvokeAsync("MenuInforComponent")
+
+            </div>
+
+
+            <div class="col-9 infor_account">
+
+                <h4>THÔNG TIN TÀI KHOẢN</h4>
+
+                <ul>
+                    <li>
+                        Họ tên: <span>@Model.User.Fullname</span>
+                    </li>
+                     <li>
+                        Email: <span>@Model.User.Email</span>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

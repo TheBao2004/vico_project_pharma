@@ -1,0 +1,74 @@
+@model Pharma.ViewModels.AdminCreateVoucher
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="alert alert-info">
+    Tạo mới
+</div>
+
+<form method="post" class="row mx-0">
+
+
+	<div class="mb-3 col-5">
+		<label class="mb-2" asp-for="Voucher.Name"></label>
+		<input asp-for="Voucher.Name" class="form-control" />
+		<span class="text-danger" asp-validation-for="Voucher.Name"></span>
+	</div>
+
+	 <div class="mb-3 col-5">
+	<label class="mb-2" asp-for="Voucher.Code"></label>
+	<input asp-for="Voucher.Code" class="form-control" />
+	<span class="text-danger" asp-validation-for="Voucher.Code"></span>
+	</div>
+
+	<div class="form-check form-switch col-2" style="text-align: center;">
+		<input class="form-check-input" asp-for="Voucher.Active" type="checkbox" role="switch"
+			id="flexSwitchCheckChecked">
+		<label class="form-check-label" for="flexSwitchCheckChecked" asp-for="Voucher.Active"></label>
+	</div>
+
+    <div class="col-6 mb-3">
+        <label for="" asp-for="Voucher.Condition"></label>
+        <select asp-for="Voucher.Condition" class="form-select">
+            <option value="1">Tổng đơn</option>
+            <option value="2">Số sản phẩm</option>
+        </select>
+        <span asp-validation-for="Voucher.Condition"></span>
+    </div>
+
+    <div class="col-6 mb-3">
+        <label for="" asp-for="NumberCondition"></label>
+        <input type="text" class="form-control" asp-for="NumberCondition">
+        <span asp-validation-for="NumberCondition"></span>
+    </div>
+
+        <div class="col-6 mb-3">
+        <label for="" asp-for="Voucher.Voucher"></label>
+        <select asp-for="Voucher.Voucher" class="form-select">
+            <option value="1">Tiền</option>
+            <option value="2">Phần trăm</option>
+        </select>
+        <span asp-validation-for="Voucher.Voucher"></span>
+    </div>
+
+    <div class="col-6 mb-3">
+        <label for="" asp-for="NumberVoucher"></label>
+        <input type="text" class="form-control" asp-for="NumberVoucher">
+        <span asp-validation-for="NumberVoucher"></span>
+    </div>
+
+    <div class="col-12 mb-3">
+        <input type="submit" class="btn btn-info py-0" value="Tạo">
+    </div>
+
+</form>
+
+<hr>
+
+<a asp-action="Index" class="btn btn-info">Danh sách</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

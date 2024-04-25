@@ -1,0 +1,40 @@
+[
+  {
+    "outputFileName": "wwwroot/css/AdminCss.css",
+    "inputFiles": [
+      "wwwroot/lib/tagify/tagify.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/AdminJs.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery.cookie.min.js",
+      "wwwroot/lib/tagify/jQuery.tagify.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/BundlesCss.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "wwwroot/lib/fancybox/jquery.fancybox.min.css",
+      "wwwroot/lib/slick/slick.min.css",
+      "wwwroot/lib/slick/slick-theme.css",
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/BundlesJs.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "wwwroot/lib/fancybox/jquery.fancybox.min.js",
+      "wwwroot/lib/slick/slick.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

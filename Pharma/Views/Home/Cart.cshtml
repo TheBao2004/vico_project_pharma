@@ -1,0 +1,163 @@
+@using Pharma.Services
+
+@model Pharma.ViewModels.PageCartViewModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="cart">
+
+    <div class="container">
+
+        <h1>Giỏ hàng của bạn</h1>
+
+        <div class="main_cart row mx-0">
+
+            <div class="col-9">
+
+                <div class="title_table_cart row mx-0">
+                    <div class="col-6">
+                        Thông tin sản phẩm
+                    </div>
+                    <div class="col-2">
+                        Đơn giá
+                    </div>
+                    <div class="col-2">
+                        Số lượng
+                    </div>
+                    <div class="col-2">
+                        Thành tiền
+                    </div>
+                </div>
+
+                <div class="list_product_table_cart">
+                  
+                  @if(Model.Carts.Count > 0){
+                      @foreach (var x in Model.Carts)
+                    {
+
+                        string imgStr = x.Product.Images;
+
+                        string[] img = Helper.StringToArray(imgStr, ",");
+
+                        string Price = Helper.IfOrElse(x.Product.Discount ?? 0, x.Product.Price);
+
+                        <div class="item_product_table_cart row mx-0">
+                            <div class="col-6 row mx-0 infor_product_table_cart">
+                                <div class="col-3">
+                                    @* <img width="100%" src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" alt=""> *@
+                                    <img width="100%" src="~/uploads/@(Helper.ImageDefault(img[0]))" alt="">
+                                </div>
+                                <div class="col-9">
+                                    <a href="">@x.Product.Name</a>
+                                    <span>Xóa</span>
+                                </div>
+                            </div>
+                            <div class="col-2 price_product_table_cart">
+                                <span>
+                                    @* 100.000đ *@
+                                    @(int.Parse(Price).ToString("N0")) đ
+                                    @* @(Price) đ *@
+                                </span>
+                            </div>
+                            <div class="col-2 quantity_product_table_cart">
+                                <form class="quantity_table_cart">
+                                    <span class="minus_to_cart">-</span>
+                                    <input class="quantity_to_cart" data-pro_id="@x.Product.Id" type="text" value="@x.Count">
+                                    <span class="add_to_cart">+</span>
+                                </form>
+                            </div>
+                            <div class="col-2 total_product_table_cart">
+                                <span>
+                                    @{
+                                        int itemTotail = int.Parse(Price) * x.Count;
+                                    }
+                                    @itemTotail.ToString("N0") đ
+                                </span>
+                            </div>
+                        </div>
+
+                    }
+                  }else{
+                    <div colspan="10" class="text-danger text-center py-3">Chưa có sản phẩm</div>
+                  }
+
+                </div>
+
+                <div class="checkbill_table_cart mt-3 row mx-0">
+
+                     <div class="col-8">
+
+                </div>
+
+                <div class="col-4">
+
+                    <div class="total_cart">
+                        <span>Tổng tiền:</span>
+                        <span>@Model.Totail.ToString("N0") đ</span>
+                    </div>
+                    <div>
+                        <a asp-action="CheckBill">
+                        <button>
+                           Thanh toán
+                        </button>
+                        </a>
+                    </div>
+
+                </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-3">
+
+               <div class="time_cart">
+                    <h5>Thời gian giao hàng</h5>
+                    <div class="row mx-0 row-cols-2 mt-3">
+                        <div class="form-group">
+                            <input type="date" class="form-control" placeholder="Chọn ngày">
+                        </div>
+                        <div class="form-group">
+                            <select name="" id="" class="form-select" aria-placeholder="123">
+                                <option value="">Chọn thời gian</option>
+                                <option value="1">08h00-12h00</option>
+                                <option value="2">14h00-18h00</option>
+                                <option value="3">19h00-21h00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="choose_use_time_cart ">
+                        <input type="checkbox" name="" id="show_form_time_cart">
+                        <label id="show_form_time_cart">Xuất hóa đơn công ty</label>
+                    </div>
+                    <div class="form_time_cart un_time_cart">
+                        <div class="mb-3">
+                            <label for="">Tên công ty</label>
+                            <input type="text" class="form-control" placeholder="Tên công ty ...">
+                        </div>
+                         <div class="mb-3">
+                            <label for="">Mã thuế</label>
+                            <input type="text" class="form-control" placeholder="Mã thuế ...">
+                        </div>
+                         <div class="mb-3">
+                            <label for="">Địa chỉ công ty</label>
+                            <textarea name="" id="" cols="10" rows="2" class="form-control" placeholder="Địa chỉ công ty ..."></textarea>
+                        </div>
+                         <div class="mb-3">
+                            <label for="">Email nhận đơn hàng</label>
+                            <input type="text" class="form-control" placeholder="Email nhận hóa đơn">
+                        </div>
+                    </div>
+               </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>

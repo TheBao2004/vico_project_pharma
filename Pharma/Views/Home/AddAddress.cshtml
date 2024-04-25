@@ -1,0 +1,239 @@
+@model Pharma.ViewModels.PageAddress
+
+@{
+    ViewData["Title"] = "AddAddress";
+}
+
+<div class="modal fade" id="AddAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="AddAddressLabel" aria-hidden="true">
+    <div class="modal-dialog-centered modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="AddAddressLabel">THÊM ĐỊA CHỈ MỚI</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="row mx-0" method="post" id="form_AddAddress">
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="fullname" placeholder="Họ tên">
+                    </div>
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
+                    </div>
+
+                    @* <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="email" placeholder="Email">
+                    </div> *@
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="address" placeholder="Địa chỉ">
+                    </div>
+
+                    @* <div class="mb-3 col-12">
+                    <select name="nation" id="" class="form-select">
+                    <option value="">Chọn quốc gia</option>
+                    </select>
+                    </div> *@
+
+                    <div class="mb-3 col-4">
+                        <select name="city" id="pharma_city" class="form-select">
+                            <option value="">Chọn thành phố</option>
+                            @foreach (var x in Model.Cities)
+                            {
+                                <option value="@x.Id">@x.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <select name="district" id="pharma_district" class="form-select">
+                            <option value="">Chọn huyện</option>
+                            @foreach (var x in Model.Districts)
+                            {
+                                <option value="@x.Id">@x.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <select name="ward" id="pharma_ward" class="form-select">
+                            <option value="">Chọn xã</option>
+                            @foreach (var x in Model.Wards)
+                            {
+                                <option value="@x.ID">@x.Name</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    @* <div class="mb-3 col-12">
+                    <input type="text" class="form-control" name="zip" placeholder="Mã zip">
+                    </div> *@
+
+                    <div class="mb-3 col-12 d-flex justify-content-between">
+                        <div>
+                            <input type="checkbox" name="default">
+                            <label for="" class="ml-3">Đặt làm địa chỉ mặc định</label>
+                        </div>
+                        <div>
+                            <button class="btn btn-success">Thêm địa chỉ</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EditAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="EditAddressLabel" aria-hidden="true">
+
+    <div class="modal-dialog-centered modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="EditAddressLabel">SỬA ĐỊA CHỈ</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="row mx-0" method="post" id="form_EditAddress">
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control" asp-for="@Model.Address.Name" placeholder="Họ tên">
+                    </div>
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control" asp-for="@Model.Address.Phone"placeholder="Số điện thoại">
+                    </div>
+
+                    @* <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="email" placeholder="Email">
+                    </div> *@
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control"asp-for="@Model.Address.Address" placeholder="Địa chỉ">
+                    </div>
+
+                    @* <div class="mb-3 col-12">
+                    <select name="nation" id="" class="form-select">
+                    <option value="">Chọn quốc gia</option>
+                    </select>
+                    </div> *@
+
+                    <div class="mb-3 col-4">
+                        <select name="city" id="pharma_city_edit" asp-for="@Model.Address.CityId" class="form-select">
+                            <option value="">Chọn thành phố</option>
+                            @foreach (var x in Model.Cities)
+                            {
+                                <option value="@x.Id">@x.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <select name="district" id="pharma_district_edit" asp-for="@Model.Address.DistrictId" class="form-select">
+                            <option value="">Chọn huyện</option>
+                            @foreach (var x in Model.Districts)
+                            {
+                                <option value="@x.Id">@x.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <select name="ward" id="pharma_ward_edit" class="form-select" asp-for="@Model.Address.WardId">
+                            <option value="">Chọn xã</option>
+                            @foreach (var x in Model.Wards)
+                            {
+                                <option value="@x.ID">@x.Name</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    @* <div class="mb-3 col-12">
+                    <input type="text" class="form-control" name="zip" placeholder="Mã zip">
+                    </div> *@
+
+                    <div class="mb-3 col-12 d-flex justify-content-between">
+                        <div>
+                            <input type="checkbox" name="default">
+                            <label for="" class="ml-3">Đặt làm địa chỉ mặc định</label>
+                        </div>
+                        <div>
+                            <button class="btn btn-success">Sửa địa chỉ</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="account">
+
+    <div class="container">
+
+        <div class="row mx-0">
+
+            <div class="col-3">
+
+                @await Component.InvokeAsync("MenuInforComponent")
+
+            </div>
+
+
+            <div class="col-9 add_address_account">
+
+                <h4>ĐỔI MẬT KHẨU</h4>
+
+                <button id="add_address_infor" data-bs-toggle="modal" data-bs-target="#AddAddress" class="btn btn-success">Thêm địa
+                    chỉ</button>
+
+                <hr>
+
+                <div class="list_address_account">
+
+                    @if(Model.Addresss.Count > 0){
+
+                        @foreach(var x in Model.Addresss){
+
+                        <div class="item_address_account row mx-0 border-bottom mb-3">
+
+                        <div class="col-10">
+                            <p>Họ tên: <span>@x.Address.Name</span> @if(x.Address.Default){ <span class="default_address_account">Địa chỉ mặc định</span> } </p>
+                            <p>Địa chỉ: <span>@x.Address.Address, @x.Ward.Name, @x.District.Name, @x.City.Name</span></p>
+                            <p>Số điện thoại: <span>@x.Address.Phone</span></p>
+                        </div>
+
+                        <div class="col-2 btn_item_address_account">
+                            <span class="edit_item_address_account" data-address_id="@x.Address.Id">Chỉnh sửa địa chỉ</span>
+                            <span class="remove_item_address_account"><a asp-action="RemoveAddress" asp-route-id="@x.Address.Id" class="text-decoration-none text-danger">Xóa</a></span>
+                        </div>
+
+                        </div>  
+
+                        }
+
+                    }else{
+                        <p class="text-danger text-center">Chưa có địa chỉ nào</p>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

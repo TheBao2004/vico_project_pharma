@@ -1,0 +1,87 @@
+@model List<Pharma.ViewModels.ItemOrderInfor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="alert alert-info">
+    Danh sách đơn hàng
+</div>
+
+<hr>
+
+<table class="table">
+
+    <tr class="bg-info">
+        <th>Đơn hàng</th>
+        <th>Ngày</th>
+        <th>Địa chỉ</th>
+        <th>Giá trị đơn hàng</th>
+        <th>TT thanh toán</th>
+        <th>TT vận chuyển</th>
+    </tr>
+
+
+    @if (Model.Count > 0)
+    {
+
+        @foreach (var x in Model.ToList())
+        {
+
+            <tr class="list_order_table_order">
+                <td><a asp-action="Detail" asp-route-id="@x.Order.OrderId">#@x.Order.OrderId</a></td>
+                <td>@x.Order.OrderDate.ToString("d")</td>
+                <td>@x.Order.Address, @x.City.Name, @x.District.Name, @x.Ward.Name</td>  
+                @* <td>@x.Order.Address</td>   *@
+                <td>@x.Order.Total.ToString("N0") đ</td>
+                <td>
+                    @if (x.Order.Thanhtoan)
+                    {
+                        <span>Đã thanh toán</span>
+                    }
+                    else
+                    {
+                        <span>Chưa thanh toán</span>
+                    }
+                </td>
+                <td>
+                    @if (x.Order.State == 0)
+                    {
+                        <span>Đã hủy</span>
+                    }
+                    else if (x.Order.State == 1)
+                    {
+                        <span>Đơn mới</span>
+                    }
+                    else if (x.Order.State == 2)
+                    {
+                        <span>Đang sử lí</span>
+                    }
+                    else if (x.Order.State == 3)
+                    {
+                        <span>Đang giao</span>
+                    }
+                    else if (x.Order.State == 4)
+                    {
+                        <span>Đã giao</span>
+                    }
+                </td>
+            </tr>
+
+        }
+
+    }
+    else
+    {
+        <tr>
+            <td colspan="10" class="text-center text-danger">Chưa có đơn hàng nào</td>
+        </tr>
+    }
+
+
+
+
+
+
+</table>

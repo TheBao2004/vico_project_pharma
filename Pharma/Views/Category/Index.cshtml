@@ -1,0 +1,65 @@
+﻿@model List<Pharma.ViewModels.AdminListCategoryViewModel>
+
+
+<div class="alert alert-info">
+	Danh sách
+</div>
+
+<a asp-action="Create" class="btn btn-info">Tạo mới</a>
+
+<hr/>
+
+<table class="table">
+    <tr class="bg-info text-light">
+        <th>Tên</th>
+        <th>Danh mục con</th>
+        <th>Slug</th>
+        <th width="30%">Ảnh</th>
+        <th>Kích hoạt</th>
+        <th>Action</th>
+    </tr>
+
+    @if(Model.Count > 0 ){
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>
+                    @x.Category.Name
+                </td>
+                <td>
+                    @foreach (var c in x.Categories)
+                    {
+                        <span class="text-info">@c.Name |</span>
+                    }
+                </td>
+                <td>
+                    @x.Category.Slug
+                </td>
+                <td class="text-center">
+                    <img src="~/uploads/@x.Category.Image" width="30%" alt="Alternate Text" />
+                </td>
+                <td>
+                    @if (x.Category.Active)
+                    {
+                        <p class="text-success">Đã kích hoạt</p>
+                    }
+                    else
+                    {
+                        <p class="text-danger">Chưa kích hoạt</p>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@x.Category.Id">Sửa</a>
+                    |
+                    <a>Xóa</a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr><td class="text-danger" colspan="10">Không có danh mục</td></tr>
+    }
+
+
+</table>

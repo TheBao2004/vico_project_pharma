@@ -1,0 +1,172 @@
+@using Pharma.Services
+
+@model Pharma.ViewModels.PageOrderDetailInfor
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="alert alert-info">
+    Chi tiết đơn hàng
+</div>
+
+<div class="row gy-2 mx-0">
+
+    <div class="col-6">
+
+        <h6>Mã đơn hàng: <span class="">@Model.Order.OrderId</span></h6>
+
+        <h6>Trạng thái thanh toán:
+
+            @if (Model.Order.Thanhtoan)
+            {
+                <span>Đã thanh toán</span>
+            }
+            else
+            {
+                <span>Chưa thanh toán</span>
+            }
+
+        </h6>
+
+        <h6>Trạng thái vận chuyển:
+
+            @if (Model.Order.State == 0)
+            {
+                <span>Đã hủy</span>
+            }
+            else if (Model.Order.State == 1)
+            {
+                <span>Đơn mới</span>
+            }
+            else if (Model.Order.State == 2)
+            {
+                <span>Đang sử lí</span>
+            }
+            else if (Model.Order.State == 3)
+            {
+                <span>Đang giao</span>
+            }
+            else if (Model.Order.State == 4)
+            {
+                <span>Đã giao</span>
+            }
+
+        </h6>
+
+        <h6>
+            Ngày tạo: <span>@Model.Order.OrderDate.ToString("d")</span>
+        </h6>
+
+        <hr>
+
+        <h6 class="">Tên người nhận: @Model.Order.Username</h6>
+        <h6 class="">Email người nhận: @Model.Order.Email</h6>
+
+        <h6>Địa chỉ: @Model.Order.Address, @Model.City.Name, @Model.District.Name, @Model.Ward.Name</h6>
+        <h6>Số điện thoại: @Model.Order.Phone</h6>
+
+        <h6>Kiểu thanh toán:
+            @if (Model.Order.Payment == 1)
+            {
+                <span>Tiền mặt</span>
+            }
+            else if (Model.Order.Payment == 2)
+            {
+                <span>Thánh toán online</span>
+            }
+        </h6>
+
+        <h6>Ghi chú: @Model.Order.Note</h6>
+
+    </div>
+
+    <form class="col-6" method="post">
+
+        <input type="hidden" asp-for="Order.OrderId">
+        <input type="hidden" asp-for="Order.Address">
+        <input type="hidden" asp-for="Order.Email">
+        <input type="hidden" asp-for="Order.Phone">
+        <input type="hidden" asp-for="Order.Username">
+        <input type="hidden" asp-for="Order.CityId">
+        <input type="hidden" asp-for="Order.DistrictId">
+        <input type="hidden" asp-for="Order.WardId">
+        <input type="hidden" asp-for="Order.Payment">
+        <input type="hidden" asp-for="Order.OrderDate">
+        <input type="hidden" asp-for="Order.Thanhtoan">
+        <input type="hidden" asp-for="Order.Total">
+        <input type="hidden" asp-for="Order.UserId">
+
+        <div class="mb-3">
+            <label class="mb-3" asp-for="Order.State"></label>
+            <select asp-for="Order.State" class="form-select">
+                <option value="0">Hủy đơn</option>
+                <option value="1">Đơn mới</option>
+                <option value="2">Đang xử lí</option>
+                <option value="3">Đang giao</option>
+                <option value="4">Đã giao</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="mb-3" asp-for="Order.Note"></label>
+            <textarea asp-for="Order.Note" cols="30" rows="5" class="form-control">
+
+            </textarea>
+            <span class="text-danger mt-2 d-inline-block" asp-validation-for="Order.Note"></span>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-info">Cập nhật</button>
+        </div>
+
+    </form>
+
+</div>
+
+<hr>
+
+<table class="table">
+
+    <tr class="bg-info">
+        <th width="55%">Sản phẩm</th>
+        <th>Đơn giá</th>
+        <th>Số lượng</th>
+        <th>Tổng</th>
+    </tr>
+
+    @foreach (var x in Model.Products)
+    {
+
+        <tr>
+            <td class="row mx-0">
+                <div class="col-3">
+                    <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" alt="" width="100%">
+                </div>
+                <div class="col-9">
+                    <a href="">@x.Product.Name</a>
+                </div>
+            </td>
+            @* <td>@(int.Parse(Helper.IfOrElse(x.Product.Discount ?? 0, x.Product.Price)).ToString("N0")) ₫</td> *@
+            <td>@((x.Price).ToString("N0")) đ</td>
+            <td>@x.Quantity</td>
+            @* <td>@((int.Parse(Helper.IfOrElse(x.Product.Discount ?? 0, x.Product.Price)) * x.Quantity).ToString("N0"))
+        ₫</td> *@
+            <td>@((x.Price * x.Quantity).ToString("N0")) đ</td>
+        </tr>
+
+    }
+
+</table>
+
+<hr>
+
+<div class="d-flex justify-content-end">
+    <h4>Tổng đơn: @Model.Order.Total.ToString("N0") đ</h4>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,77 @@
+@mixin productNormal(){
+
+    .item_product_component {
+        background-color: $color_white;
+        border-radius: 10px;
+        padding: 15px;
+        .img_item_product_component {
+            position: relative;
+            .smart_item_product_component {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-image: url("../images/background-smart.png");
+                background-repeat: no-repeat;
+                font-size: 12px;
+                border-radius: 5px;
+                color: #ffff;
+                height: 24px;
+                width: 50px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+                z-index: 99;
+            }
+            img {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.3s ease; 
+                &:hover {
+                    transform: scale(1.1); 
+                }
+            }
+        }
+        .content_item_product_component {
+            p {
+                margin-bottom: 10px;
+                height: 50px;
+                width: 100%;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                span {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                }
+            }
+            .sub_content_item_product_component {
+                div {
+                    padding: 0;
+                    .discount_item_product_component {
+                        color: $color_main;
+                    }
+                    .price_item_product_component {
+                        color: grey;
+                        text-decoration: line-through;
+                        font-size: small;
+                    }
+                }
+                div:last-child {
+                    display: flex;
+                    justify-content: end;
+                    align-items: end;
+                }
+            }
+        }
+    }
+
+}

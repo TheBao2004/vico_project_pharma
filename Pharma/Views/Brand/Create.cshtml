@@ -1,0 +1,49 @@
+﻿@model Pharma.Models.BrandModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="alert alert-info">
+    Thêm mới
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Create" class="row mx-0" enctype="multipart/form-data">
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            <div class="form-group col-5 mb-3">
+                <label asp-for="Name" class="control-label mb-2"></label>
+                <input asp-for="Name" class="form-control inputSlug" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-5 mb-3">
+                <label asp-for="Slug" class="control-label mb-2"></label>
+                <input asp-for="Slug" class="form-control outputSlug" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+            <div class="form-check form-switch col-2" style="text-align: center;">
+                <input class="form-check-input" asp-for="Active" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                <label class="form-check-label" for="flexSwitchCheckChecked" asp-for="Active"></label>
+            </div>
+            <div class="form-group mb-3 col-12">
+                <label asp-for="Image" class="control-label mb-2"></label>
+                <input name="Anh" type="file" class="w-100" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Tạo" class="btn btn-info py-0" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr/>
+
+<div>
+	<a asp-action="Index" class="btn btn-info">Danh sách</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

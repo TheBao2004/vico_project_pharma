@@ -1,0 +1,305 @@
+@using Pharma.Services
+
+@model Pharma.ViewModels.PageCheckBill
+
+@{
+    ViewData["Title"] = "CheckBill";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap5/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/lib/owl-carousel/docs/assets/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/lib/owl-carousel/docs/assets/owlcarousel/assets/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="~/lib/slick/slick.css">
+    <link rel="stylesheet" href="~/lib/slick/slick-theme.css">
+
+    <link rel="stylesheet" href="~/css/main.css">
+
+
+    <title>Document</title>
+
+</head>
+
+<body>
+
+
+
+    <form method="post" class="checkbill">
+
+        <div class="container">
+
+            <div class="row mx-0">
+
+                <div class="col-8 checkbill_left">
+
+                    <div class="title_checkbill">
+
+                        <h2><a href="">ND Pharma</a></h2>
+
+                        <div class="row mx-0 row-cols-2 infor_user_checkbill">
+
+                            <div class="left_infor_user_checkbill">
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span class="fw-bold fs-5">Thông tin nhận hàng</span>
+                                        <a href=""><i class="fa fa-angle-double-left"></i> Đăng xuất</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span class="fw-bold fs-5">Thông tin nhận hàng</span>
+                                        <a href=""><i class="fa fa-user-circle"></i> Đăng nhập</a>
+                                    </div>
+                                }
+
+
+                                <div class="mb-3">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <input type="text" asp-for="User.Email" disabled class="form-control"
+                                            placeholder="Email">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" asp-for="User.Email" class="form-control" placeholder="Email">
+                                    }
+                                    <span class="text-danger" asp-validation-for="User.Email"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" asp-for="Address.Name"
+                                        placeholder="Họ và tên">
+                                    <span class="text-danger" asp-validation-for="Address.Name"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="text" asp-for="Address.Phone" class="form-control"
+                                        placeholder="Số điện thoại">
+                                    <span class="text-danger" asp-validation-for="Address.Phone"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <input type="text" asp-for="Address.Address" class="form-control"
+                                        placeholder="Địa chỉ">
+                                    <span class="text-danger" asp-validation-for="Address.Address"></span>
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <select  id="pharma_city_bill" class="form-select" asp-for="City">
+                                        <option value="">Tỉnh thành</option>
+                                        @foreach (var x in Model.Cities)
+                                        {
+                                            <option value="@x.Id">@x.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="City"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <select  id="pharma_district_bill" class="form-select" asp-for="District">
+                                        <option value="">Quận huyện</option>    
+                                        @foreach (var x in Model.Districts)
+                                        {
+                                            <option value="@x.Id">@x.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="District"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <select  id="pharma_ward_bill" class="form-select" asp-for="Ward">
+                                        <option value="">Phường xã</option>
+                                        @foreach (var x in Model.Wards)
+                                        {
+                                            <option value="@x.ID">@x.Name</option>
+                                        }
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="Ward"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea asp-for="Note" id="" class="form-control" placeholder="Ghi chú">
+                                    </textarea>
+                                    <span class="text-danger" asp-validation-for="Note"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="right_infor_user_checkbill">
+
+                                <div class="mb-3 fs-5 fw-bold">
+                                    <span>Vận chuyển</span>
+                                </div>
+
+                                <div class="input-group mb-3 input_transport_checkbill">
+                                    <div class="input-group-text">
+                                        <input class="form-check-input mt-0" type="radio" value=""
+                                            aria-label="Radio button for following text input">
+                                    </div>
+                                    <input type="text" class="form-control" value="Giao hàng tận nơi" disabled
+                                        aria-label="Text input with radio button">
+                                </div>
+
+                                <div class="mb-3 fw-bold fs-5">
+                                    <span>Thanh toán</span>
+                                </div>
+                                <div id="div_pay_checkbill">
+                                    <div class="input-group input_pay_checkbill">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" asp-for="Payment" type="radio"
+                                                value="1" aria-label="Radio button for following text input">
+                                        </div>
+                                        <input type="text" class="form-control" value="Thu hộ (COD)" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+
+                                    <div class="input-group input_pay_checkbill">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" asp-for="Payment" type="radio"
+                                                value="2" aria-label="Radio button for following text input">
+                                        </div>
+                                        <input type="text" class="form-control" value="Chuyển khoản" disabled
+                                            aria-label="Text input with radio button">
+
+                                    </div>
+                                </div>
+                                <span class="text-danger" asp-validation-for="Payment"></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-4 checkbill_right">
+
+                    <div class="title_checkbill_right">
+                        Đơn hàng (1 sản phẩm)
+                    </div>
+
+                    <div>
+
+                        <div class="list_product_checkbill">
+
+                            @foreach (var x in Model.Carts)
+                            {
+
+                                <div class="item_product_checkbill row mx-0">
+
+                                    <div class="col-2 position-relative">
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                                            @x.Cart.Count
+                                        </span>
+                                        <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" alt="" width="100%">
+                                    </div>
+
+                                    <div class="col-8 pt-3 fs-6">
+                                        @* Viên uống B Complex Vitamin Royal Care hỗ trợ giảm mệt mỏi, căng thẳng (60 viên) *@
+                                        @* @(Helper.IfOrElse(x.Cart.Product.Discount ?? 0, x.Cart.Product.Price)) *@
+                                        @x.Cart.Product.Name
+                                    </div>
+
+                                    <div class="col-2">
+                                        @(int.Parse(Helper.IfOrElse(x.Cart.Product.Discount ?? 0, x.Cart.Product.Price)).ToString("N0")) đ
+                                    </div>
+
+                                </div>
+
+                            }
+                        </div>
+
+                        <hr>
+
+                        <div class="row mx-0 apply_voucher_checkbill">
+                            <div class="col-9">
+                                <input type="text" asp-for="Voucher" class="form-control" id="code_voucher_bill">
+                                <span class="text-danger" id="error_voucher_bill"></span>
+                            </div>
+                            <div class="col-3 pr-0">
+                                <button class="btn btn-primary" id="btn_voucher_bill" type="button">Áp dụng</button>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <span>Tạm tính</span>
+                            <span>@(Model.Total.ToString("N0"))₫</span>
+                            <input type="hidden" id="old_voucher_bill" value="@Model.Total">
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <span>Phí vận chuyển</span>
+                            <span>180.000₫</span>
+                        </div>
+
+                        <div id="box_voucher_bill" class="d-flex justify-content-between d-none">
+                            <span>Mã giảm giá</span>
+                            <span>0đ</span>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between total_checkbill">
+                            <span>Tổng cộng</span>
+                            <span class="text-primary" id="total_voucher_bill">@(Model.Total.ToString("N0"))₫</span>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <a href="" class="text-decoration-none">Quay về giỏ hàng</a>
+                            <button type="submit" class="btn btn-primary">Đặt hàng</button>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <script src="~/lib/bootstrap5/bootstrap.bundle.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+    <script src="~/lib/owl-carousel/docs/assets/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/js/client/owl_carousel.js"></script>
+
+    <script src="~/lib/slick/slick.js"></script>
+    <script src="~/js/client/slick.js"></script>
+
+    <script src="~/js/client/app.js"></script>
+
+
+</body>
+
+</html>

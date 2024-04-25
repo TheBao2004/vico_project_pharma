@@ -1,0 +1,55 @@
+@model Pharma.ViewModels.PageLoginViewModel
+
+@{
+
+    ViewData["Title"] = "Login";
+}
+
+<div class="login">
+
+    <div class="container">
+
+        <div class="box_login">
+
+         <h2>ĐĂNG NHẬP</h2>
+            <p>Nếu bạn chưa có tài khoản, <a class="to_register" asp-action="Register">đăng ký tại đây</a></p>
+
+        <form class="form_login" method="post">
+
+            <div class="mb-3">
+                <input asp-for="Email" class="form-control" placeholder="Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+
+              <div class="mb-3">
+                <input type="password" asp-for="Password" class="form-control" placeholder="Password">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+
+              <div class="mb-3">
+                <input type="submit" class="btn" value="Đăng nhập">
+            </div>
+
+        </form>
+
+        <a href="" class="btn_bottom_login">
+            Quên mật khẩu
+        </a>
+
+        <a href="" class="btn_bottom_login">
+            Hoặc đăng nhập
+        </a>
+
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

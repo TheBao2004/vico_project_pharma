@@ -1,0 +1,376 @@
+.slice_home {
+    border-radius: 10px;
+    padding-bottom: 30px;
+}
+
+.categories_home {
+    background-color: $color_gray;
+    padding: 35px 0;
+    padding-bottom: 30px;
+    h4 {
+        margin-bottom: 35px;
+    }
+    .slide_categories {
+        .item_slide_categories {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            a {
+                color: #231f20;
+                text-decoration: none;
+            }
+            p {
+                color: #76809b;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.deal_voucher_home {
+    padding: 35px 0;
+
+    .deal_home {
+        background-color: $color_main;
+        border-radius: 15px;
+        padding: 30px 0;
+
+        .top_deal_home {
+            padding: 0 30px;
+            margin-bottom: 40px;
+            h2,
+            p {
+                color: white;
+            }
+            .top_deal_home_2 {
+                display: flex;
+                justify-content: end;
+                align-items: center;
+                a {
+                    text-decoration: none;
+                    @include btnNormal($color_white, $color_main, $color_white, $color_main, $color_white, $color_main);
+                    width: 130px;
+                    span {
+                        display: inline-block;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .bottom_deal_home {
+            .bottom_deal_home_1 {
+                padding-left: 0;
+                div {
+                    p {
+                        color: $color_white;
+                    }
+                    background: linear-gradient(102.28deg, #ff6f1e 9.68%, #ff0f49 100%),
+                        linear-gradient(0deg, #fff, #fff);
+                    padding: 10px;
+                    display: inline-block;
+                    border-radius: 0 12px 12px 0;
+                    width: 200px;
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+
+            .bottom_deal_home_2 {
+                .list_product_deal_home {
+
+                    @include productNormal();
+
+                }
+            }
+        }
+    }
+
+    .voucher_home {
+        .title_voucher_home {
+            text-align: center;
+            h3 {
+                display: inline-block;
+                padding: 5px 15px;
+                border: 1px solid $color_main;
+                border-radius: 20px;
+                color: $color_main;
+                margin: 0 auto;
+            }
+            margin-bottom: 20px;
+        }
+
+        .list_voucher_home {
+            .item_voucher_home {
+                border-radius: 10px;
+                color: white;
+                display: flex;
+                background-color: $color_main;
+                margin-bottom: 20px;
+                .item_voucher_home_1 {
+                    padding: 20px 0;
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    p {
+                        margin: 0;
+                        text-align: center;
+                    }
+                }
+                .item_voucher_home_2 {
+                    border-left: 2px dashed white;
+                    width: 30%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    div {
+                        border-radius: 5px;
+                        height: 25px;
+                        width: 20px;
+                        background-color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tab_home{
+
+    .title_tab_home{
+        margin-bottom: 30px;
+        h4{
+            color: #212633;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+        .list_tab_home{
+            .nav-link{
+                @include btnNormal($color_black, $color_white, $color_gray_1, $color_main, $color_white, $color_main);
+                margin-right: 15px;
+            }
+            .active{
+                border:1px solid $color_main;
+                color: $color_main;
+            }
+        }
+    }
+
+    .list_product_tab_home{
+        padding-bottom: 30px;
+        .item_product_tab_home{
+            @include productNormal();
+            .item_product_component{
+                border: 1px solid $color_gray_1;
+                margin: 5px;
+            }
+            padding: 0;
+        }
+    }
+
+
+}
+
+.about_home{
+
+    background: linear-gradient(180deg, #fff 0%, #E8FFF8 100.02%);
+    padding-bottom: 200px;
+
+    .content_about_home{
+        display: flex;
+        align-items: center;
+
+        h4{
+            color: $color_main;
+        }
+
+        h2{
+            margin-bottom: 20px;
+        }
+
+        p{
+            color: #76809B;
+            font-size: 16px;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .icon_about_home{
+            div{
+                margin-bottom: 20px;
+                span{
+                    padding-left: 10px;
+                    font-weight: 700;
+                }
+            }
+        }
+
+    }
+
+}
+
+.group_home{
+
+padding: 30px 0;
+
+.group_left{
+
+    h4{
+        margin-bottom: 20px;
+    }
+    padding: 15px;
+    border-radius: 10px;
+    
+    background-color: $color_main_1;
+   
+    .list_product_group_left{
+        
+        @include productNormal;
+        
+        .item_brand_group_left{
+            div{
+                div{
+                    background-color: $color_white;
+                    padding: 5px;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+    }
+
+}
+
+.group_right{
+
+    .title_group_right{
+        h4{
+            a{
+                text-decoration: none;
+                color: $color_black;
+                &:hover{
+                    color: $color_main;
+                }
+            }
+        }
+        
+        .nav-link{
+            @include btnNormal($color_black, $color_white, $color_gray_1, $color_main, $color_white, $color_main);
+            margin-right: 15px;
+        }
+        .active{
+            border:1px solid $color_main;
+            color: $color_main;
+        }
+
+        .goto_title_group_right{
+            @include btnNormal($color_main, $color_white, $color_main, $color_white, $color_main, $color_main);
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+        }
+
+    }
+
+    .list_product_group_right{
+        padding: 5px;
+        .item_product_group_right{
+            @include productNormal();
+            border: 1px solid $color_gray_1;
+            border-radius: 10px;
+        }
+
+    }
+
+    .list_product_group_right_other{
+        .item_product_group_right{
+            padding: 0;
+            padding: 5px;
+            @include productNormal();
+            .item_product_component{
+                border: 1px solid $color_gray_1;
+                border-radius: 10px;
+            }
+        }
+    }
+
+}
+
+}
+
+.medicine_home{
+
+    padding: 30px 0;
+
+    .row_medicine_home{
+        padding: 35px;
+        // background-color: linear-gradient(266.98deg, rgba(202, 237, 220, 0.27) -11.09%, #DCFFF0 89.04%), linear-gradient(0deg, #fff, #fff);
+        background-color: $color_main_1;
+        border-radius: 15px;
+        position: relative;
+
+        p{
+            color: #76809B;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        h2{
+            font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 10px;
+        }
+
+        .btn_medicine_home{
+            @include btnNormal($color_white, $color_main, $color_main, $color_main, transparent, $color_main);
+            display: inline-block;
+            padding: 5px 10px;
+            text-decoration: none;
+        }
+
+        .list_medicine_home{
+            z-index: 99;
+            padding-bottom: 0;
+            .item_medicine_home{
+                padding: 20px;
+                .item_medicine_home_div{
+                    background-color: $color_white;
+                    border-radius: 10px;
+                    padding: 20px 10px;
+                    div{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        a{
+                            color: #231f20;
+                            font-weight: 500;
+                            text-decoration: none;
+                            cursor: pointer;
+                            &:hover{
+                                color: $color_main;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    .row_medicine_home::after{
+        content: "";
+        background-image: url("../images/bg-before-find-medicine.png");
+        width: 418px;
+        height: 320px;
+        position: absolute;
+        right: 0;
+        bottom: 0px;
+        border-radius: 15px;
+    }
+
+}

@@ -1,0 +1,59 @@
+@model List<Pharma.Models.KeywordModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="alert alert-info">
+    Danh sách
+</div>
+
+<a asp-action="Create" class="btn btn-info">Thêm mới</a>
+
+<hr>
+
+@await Html.PartialAsync("_Alert")
+
+<table class="table" id="table_keyword">
+
+    <tr class="bg-info">
+        <th>Id</th>
+        <th>Tên</th>
+        <th>Từ khóa</th>
+        <th>Kích hoạt</th>
+        <th>Danh mục</th>
+        <th>Thao tác</th>
+    </tr>
+
+    @if(Model.Count > 0){
+
+        @foreach(var x in Model){
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Name</td>
+                <td>@x.Keyword</td>
+                <td>
+                    @if(x.Active){
+                        <span class="text-success">Kích hoạt</span>
+                    }else{
+                        <span class="text-danger">Chưa kích hoạt</span>
+                    }
+                </td>
+                <td>@x.Category.Name</td>
+                <td class="text-center">
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@x.Id">Sửa</a>
+                    |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@x.Id">Xóa</a>
+                </td>
+            </tr>
+        }
+
+    }else{
+
+        <tr>
+            <td colspan="10" class="text-center text-danger">Không có dữ liệu</td>
+        </tr>
+
+    }
+
+</table>

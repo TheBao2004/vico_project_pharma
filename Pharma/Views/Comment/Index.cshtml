@@ -1,0 +1,52 @@
+@model List<Pharma.Models.CommentModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="alert alert-info">
+    Danh sách
+</div>
+
+<table class="table">
+
+    <tr class="bg-info"> 
+        <th>Id</th>
+        <th>Sản phẩm</th>
+        <th>Người</th>
+        <th>Bình luận</th>
+        <th>Ngày</th>
+        <th>Kích hoạt</th>
+        <th>Bình luận con</th>
+    </tr>
+
+    @if(Model.Count > 0){
+
+        @foreach(var x in Model){
+            <tr>
+                <td>@x.Id</td>
+                <td>@x.Product.Name</td>
+                <td>@x.User.Fullname</td>
+                <td>@x.Comment</td>
+                <td>@x.Created.ToString("dd-MM-yyyy")</td>
+                <td>
+                    @if(@x.Active){
+                        <a asp-action="Active" asp-route-id="@x.Id" class="btn btn-success">Đã duyệt</a>
+                    }else{
+                        <a asp-action="Active" asp-route-id="@x.Id" class="btn btn-danger">Chưa duyệt</a>
+                    }
+                </td>
+                <td>
+                    <a asp-action="CommentChild" asp-route-id="@x.Id" class="btn btn-info">Chi tiết</a>
+                </td>
+            </tr>
+        }            
+
+    }else{
+        <tr>
+            <td colspan="10" class="text-center text-danger">Chưa có bình luận nào</td>
+        </tr>
+    }
+
+</table>

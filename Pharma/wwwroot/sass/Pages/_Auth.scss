@@ -1,0 +1,320 @@
+.login{
+
+    .container{
+        padding: 70px;
+
+        .box_login{
+            margin: 0 auto;
+            h2{
+                font-weight: 400;
+                text-align: center;
+            }
+            p{
+                text-align: center;
+                font-weight: 500;
+                margin-bottom: 30px;
+                .to_register{
+                    text-decoration: none;
+                    color: $color_main;
+                    &:hover{
+                        color: $color_black;
+                    }
+                }
+            }
+            width: 33%;
+        padding: 20px;
+        border-radius: 20px;
+                border: 1px solid $color_gray_1;
+            .form_login{
+
+                input{
+                    box-shadow: none;
+                    border-color: transparent;
+                    background-color: $color_gray_2;
+                }
+                input[type="submit"]{
+                    width: 100%;
+                    background-color: $color_main;
+                    color: $color_white;
+                    &:hover{
+                        background-color: $color_white;
+                        border: 1px solid $color_main;
+                        color: $color_main;
+                    }
+                }
+
+            }
+
+
+            
+            .btn_bottom_login{
+                display: block;
+                text-align: center;
+                padding: 10px;
+                color: $color_black;
+                text-decoration: none;
+                &:hover{
+                    color: $color_main;
+                }
+            }
+
+        }
+
+
+
+    }
+
+}
+
+
+.account{
+    height: auto;
+    .menu_account{
+
+      h4{
+        font-weight: 400;
+      }  
+
+      p{
+        font-weight: 600;
+        span{
+            color: orangered;
+        }
+    }
+
+    .nav-link{
+        padding-left: 0;
+        font-weight: 500;
+        color: $color_black;
+        &:hover{
+        color: $color_main;
+        }
+    } 
+
+    .active{
+        color: $color_main;
+    }
+        
+    }
+
+    .infor_account{
+
+        h4{
+            line-height: 22px;
+            font-weight: 400;
+            color: #212B25;
+            text-transform: uppercase;
+            margin-bottom: 27px;
+        }
+
+        ul{
+            padding: 0;
+            li{
+                font-weight: 600;
+                list-style-type: none;
+                padding: 10px 0;
+                span{
+                    font-weight: 400;
+                }
+            }
+        }
+
+    }  
+
+    .orders_account{
+        h4{
+            line-height: 22px;
+            font-weight: 400;
+            color: #212B25;
+            text-transform: uppercase;
+            margin-bottom: 27px;
+        }
+
+        table{
+
+            .tilte_table_order{
+                background-color: $color_main;
+                text-align: center;
+                color: $color_white;
+                th{
+                    
+                }
+            }
+            
+            .list_order_table_order{
+                td{
+                    a{
+                        text-decoration: none;
+                    }
+                    padding: 25px 0;
+                    text-align: center;
+                    font-weight: 500;
+                }
+            }
+            
+        }
+
+    }
+
+    .order_detail_account{
+
+        h4{
+            font-weight: 400;
+            color: #212B25;
+            margin-bottom: 27px;
+        }
+
+        .status_order_detail_account{
+            margin-bottom: 40px;
+            div{
+                font-weight: 500;
+                padding: 0;
+                &:last-child{
+                    text-align: end;
+                }
+                span{
+                    margin-left: 10px;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .infor_order_detail_account{
+            height: auto;
+            .item_order_detail_account{
+            
+                .content_item_order_detail_account{
+                    border: 1px solid $color_gray_1;
+                    padding: 10px 15px;
+                    border-radius: 10px;
+                    p{
+                        margin-bottom: 10px;
+                    }
+                    .person_order{
+                        font-weight: 600;
+                    }
+                }
+            }
+
+        }
+
+        .table_order_detail_account{
+
+            margin-top: 30px;
+
+            height: 100%;
+            border: 1px solid $color_gray_1;
+            padding: 10px 15px;
+            border-radius: 10px;
+            table{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                tr{
+                    th, td{
+                        a{
+                            text-decoration: none;
+                            color: $color_black;
+                            &:hover{
+                                color: orangered;
+                            }
+                        }
+                        padding: 20px 0;
+                    }
+                    td{
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .total_order_detail_account{
+                p{
+                    font-weight: 500;
+                    display: flex;
+                    justify-content: space-between;
+                    .total_order{
+                        color: red;
+                        font-size: larger;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    .change_pass_account{
+        font-weight: 600;
+           h4{
+            font-weight: 400;
+            color: #212B25;
+            margin-bottom: 27px;
+
+        }
+
+        form{
+            width: 60%;
+                   input[type="text"], input[type="password"]{
+                box-shadow: none;
+                background-color: $color_gray_2;
+                outline: none;
+                border-color: transparent;
+            }
+            button{
+        font-weight: 600;
+            
+            }
+        }
+
+    }
+
+    .add_address_account{
+
+               h4{
+            font-weight: 400;
+            color: #212B25;
+            margin-bottom: 27px;
+
+        }
+
+        .list_address_account{
+
+           .item_address_account{
+                p{
+                padding: 0;
+                font-weight: 600;
+                span{
+                    font-weight: 400;
+                }
+                .default_address_account{
+                    color: $color_main;
+                    margin-left: 40px;
+                }
+                }
+
+                .btn_item_address_account{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    .edit_item_address_account{
+                        color: rgb(0, 94, 255);
+                    }
+                    .remove_item_address_account{
+                        color: red;
+                    }
+                    span{
+                    font-weight: 600;
+                    cursor: pointer;
+                        &:hover{
+                            color: $color_black;
+                        }
+                    }
+                }
+           } 
+
+        }
+
+    }
+
+}
+

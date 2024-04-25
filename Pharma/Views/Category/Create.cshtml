@@ -1,0 +1,57 @@
+﻿	@model Pharma.ViewModels.AdminCategoryViewModel
+
+<div class="alert alert-info">
+
+	Tạo mới
+
+</div>
+
+<form method="post" class="row mx-0" enctype="multipart/form-data">
+
+	<div class="mb-3 col-5">
+		<label class="mb-2" asp-for="Category.Name"></label>
+		<input asp-for="Category.Name" class="form-control inputSlug" />
+		<span asp-validation-for="Category.Name" class="text-danger"></span>
+	</div>
+
+	<div class="mb-3 col-5">
+		<label class="mb-2" asp-for="Category.Slug"></label>
+		<input asp-for="Category.Slug" class="form-control outputSlug" />
+		<span asp-validation-for="Category.Slug" class="text-danger"></span>
+	</div>
+
+	<div class="form-check form-switch col-2" style="text-align: center;">
+		<input class="form-check-input" asp-for="Category.Active" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+		<label class="form-check-label" for="flexSwitchCheckChecked" asp-for="Category.Active"></label>
+	</div>
+
+	<div class="form-group mb-3 col-6">
+		<label asp-for="Category.CategoryId" class="control-label mb-2"></label>
+		<select class="form-select" asp-for="Category.CategoryId">
+			<option value="0">----------</option>
+			@if (Model.Categories.Count > 0)
+			{
+				@foreach (var x in Model.Categories.ToList())
+				{
+					<option value="@x.Id">@x.Name</option>
+				}
+			}
+		</select>
+		<span asp-validation-for="Category.CategoryId" class="text-danger"></span>
+	</div>
+
+	<div class="form-group mb-3 col-6">
+		<label asp-for="Category.Image" class="control-label mb-2"></label>
+		<input name="Anh" type="file" class="w-100" />
+		<span asp-validation-for="Category.Image" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Tạo" class="btn btn-info py-0" />
+	</div>
+
+
+</form>
+
+<hr/>
+
+<a asp-action="Index" class="btn btn-info">Danh sách</a>

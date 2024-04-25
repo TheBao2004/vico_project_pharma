@@ -1,0 +1,307 @@
+.detail_product {
+    background-color: $color_gray_2;
+    padding: 50px;
+
+    .container {
+        background-color: $color_white;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        height: auto;
+    }
+
+    .img_detail_product {
+        .list_img_detail_product {
+            .item_img_detail_product {
+                border: 1px solid $color_gray_1;
+                border-radius: 10px;
+                img {
+                    border-radius: 10px;
+                }
+            }
+        }
+
+        .list_btn_detail_product {
+            .item_btn_detail_product_div {
+                .item_btn_detail_product {
+                    &:hover {
+                        border: 1px solid $color_main;
+                    }
+                    display: block;
+                    margin: 10px !important;
+                    border: 1px solid $color_gray_1;
+                    border-radius: 10px;
+                    img {
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .infor_detail_product {
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin: 0px 0px 15px;
+            line-height: 1.2;
+        }
+
+        .brand_detail_product {
+            p {
+                margin: 0;
+                span {
+                    color: $color_main;
+                    padding: 0 5px;
+                }
+            }
+
+            margin: 0px 0px 15px;
+        }
+
+        .price_detail_product {
+            h2 {
+                font-size: 30px;
+                font-weight: 500;
+                color: $color_main;
+                display: block;
+            }
+            p {
+                margin: 0;
+                color: #76809b;
+                font-size: 16px;
+                text-decoration: line-through;
+            }
+        }
+
+        .voucher_detail_product {
+            p {
+                text-align: left;
+                min-width: 100px;
+                font-weight: 700;
+                span {
+                    margin-right: 5px;
+                    font-weight: 400;
+                    display: inline-block;
+                    vertical-align: top;
+                    padding: 3px 7px;
+                    background: $color_main_1;
+                    color: $color_main;
+                    position: relative;
+                    &:first-child {
+                        margin-left: 15px;
+                    }
+                }
+            }
+        }
+
+        .form_quantity_detail_product {
+            display: flex;
+            align-items: center;
+            span {
+                min-width: 100px;
+                margin-bottom: 0;
+                font-weight: 700;
+            }
+            .input_quantity_detail_product {
+                border: 1px solid $color_gray_1;
+                padding: 5px;
+                border-radius: 5px;
+                input[type="text"] {
+                    width: 30px;
+                    border-color: transparent;
+                    &::placeholder {
+                        padding-left: 10px;
+                    }
+                    outline: none;
+                }
+                span {
+                    padding: 0 5px;
+                }
+            }
+        }
+
+        .btn_form_detail_product {
+            display: flex;
+            align-items: center;
+            padding-top: 20px;
+            button {
+                @include btnNormal($color_white, $color_main, $color_main, $color_main, $color_white, $color_main);
+                display: inline-block;
+                margin-right: 20px;
+                padding: 15px;
+                height: auto;
+                border-radius: 10px;
+            }
+            a {
+                @include btnNormal($color_main, $color_main_1, $color_main, $color_white, $color_main, $color_main);
+                display: inline-block;
+                text-decoration: none;
+                padding: 15px 20px;
+                height: auto;
+                border-radius: 10px;
+            }
+        }
+
+        .policy_pharma {
+            .col-3 {
+                padding: 0;
+            }
+            p {
+                margin: 0;
+            }
+            p:first-child {
+                font-size: 15px;
+                font-weight: 600;
+            }
+            p:last-child {
+                margin-bottom: 0;
+                color: #76809b;
+            }
+        }
+    }
+
+    .menu_desc_detail_product {
+        .card {
+            border-color: transparent;
+            li {
+                padding: 0;
+                a {
+                    cursor: pointer;
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 1;
+                    padding: 16px;
+                    border-radius: 8px;
+                    display: block;
+                    border-bottom: 1px solid #edf0f3;
+                    text-decoration: none;
+                    color: $color_black;
+                    &:hover{
+                        background-color: $color_gray_2;
+                    }
+                }
+                .active{
+                    background-color: $color_gray_2;
+                }
+            }
+        }
+    }
+
+    .content_desc_detail_product{
+
+        p{
+            font-weight: 500;
+        }
+
+        h3{
+            font-size: 25px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: $color_main;
+        }
+
+    }
+
+    .comment_detail_product{
+
+       .top_comment_detail_product{
+        border: 1px solid $color_gray_1;
+
+           background-color: rgba(144, 220, 46, 0.1);
+        .top_comment_detail_product_1{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            h2{
+                color: $color_green;
+                text-align: center;
+            }
+            p{
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            button{
+                background-color: $color_green;
+                color: $color_white;
+                padding: 10px;
+                border: 1px solid $color_green;
+                border-radius: 5px;
+                font-weight: 500;
+            }
+          
+        }
+
+        .top_comment_detail_product_2{
+            .nav-item{
+                background-color: $color_white;
+                color: $color_white;
+                padding: 3px 7px;
+                border: 1px solid $color_gray_1;
+                border-radius: 5px;
+                font-weight: 500;
+                a{
+                color: $color_black;
+                }
+                margin: 0 10px 10px 0;
+            }
+            .active{
+                border: 1px solid $color_green;
+                color: $color_green;
+
+            }
+        }
+
+       }
+        
+       .bottom_comment_detail_product{
+        border: 1px solid $color_gray_1;
+
+        .parent_comment_detail_product{
+            margin-bottom: 20px;
+            p{
+                font-weight: 400;
+            }
+    
+            .btn_comment_detail_product{
+                span{
+                    cursor: pointer;
+                    color: $color_green;
+                    margin-right: 20px;
+                    font-weight: 600;
+                    i{
+                        color: $color_gray_1;
+                        margin-right: 5px;
+                    }
+                }
+            }
+
+            .child_comment_detail_product{
+                border-left: 3px solid $color_gray_1;
+                margin-top: 20px;
+                margin-left: 30px;
+                padding-left: 10px;
+            }
+
+        }
+  
+
+       }
+
+    }
+
+    .title_product_detail_product{
+        margin-bottom: 30px
+    }
+
+    .list_product_detail_product{
+
+        .item_product_detail_product{
+            @include productNormal();
+            border: 1px solid $color_gray_1;
+            border-radius: 10px;
+        }
+
+    }
+
+}

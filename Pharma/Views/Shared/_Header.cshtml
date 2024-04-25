@@ -1,0 +1,131 @@
+@model Pharma.ViewModels.PageHeaderViewModel
+
+<header class="shadow bg-body rounded">
+
+    <div class="header-topbar">
+        <div class="container">
+            <div class="row mx-0">
+                <div class="col-lg-6 col-md-6 col-12 col-left text-welcome d-md-block d-none">
+                    Chào mừng quý khách đến với <span>NDPharma!</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12 col-right">
+                    <a href="" class="hotline-header d-md-inline-block d-none">
+                        <i class="fa fa-phone"></i>
+                        Hotline: 1900 6750
+                    </a>
+                    <a href="" hethong-header>
+                        <i class="fa fa-map-marker-alt"></i>
+                        Hệ thống cửa hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header_decan"></div>
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-xl-2 col-lg-2 col-md-5 col-12 col-left order-lg-1">
+                    <a href="" class="logo">
+                        <img src="~/images/logo-style-2.png" alt="" height="28" width="143">
+                    </a>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-3 order-lg-2 d-lg-flex d-none justify-content-end">
+                    <div class="header-category">
+                        <i class="fa fa-align-justify"></i>
+                        <span class="ml-2 d-inline-block">Danh mục</span>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-7 col-12 col-middle order-lg-3 order-md-4 order-md-2 order-3 px-3">
+                    <form class="form_search" action="" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tìm sản phẩm"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                        </div>
+                    </form>
+                </div>
+                <div
+                    class="col-xl-3 col-lg-3 col-md-6 col-7 d-flex align-items-center justify-content-start col-right order-lg-4 order-md-3 order-2">
+                    <nav class="nav header_menu_icon">
+                        <a class="nav-link" aria-current="page" href="#">
+                            <i class="fa fa-heart"></i>
+                            <span>Yêu thích</span>
+                        </a>
+                        <div id="header_menu_show_auth">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-user"></i>
+                                <span>Tài khoản</span>
+                            </a>
+                            @if(!User.Identity.IsAuthenticated){
+                                <div id="header_menu_auth" class="shadow bg-body">
+                                    <ul>
+                                        <li><a asp-action="Login">Đăng nhập</a></li>
+                                        <li><a asp-action="Register">Đăng ký</a></li>
+                                    </ul>
+                                </div>
+                            }else{
+                                <div id="header_menu_auth" class="shadow bg-body">
+                                    <ul>
+                                        <li><a asp-action="Infor">Tài khoản</a></li>
+                                        <li><a asp-action="Logout">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                        <a class="nav-link" asp-action="Cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Giỏ hàng</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-menu">
+        <div class="container">
+            <nav class="nav">
+                <a class="nav-link active" aria-current="page" asp-action="Index">Trang chủ</a>
+                <a class="nav-link" href="#">Giới thiệu</a>
+                <li id="header_menu_category">
+                    <a class="nav-link" asp-route-slug="" asp-action="Category" asp-controller="Home">Sản phẩm</a>
+                    <div class="header_menu_category_lists row row-cols-4 mx-0 shadow bg-body">
+
+                        @if (Model.Categories.Count > 0)
+                        {
+
+                            @foreach(var cateP in Model.Categories){
+
+                                <div class="d-inline-block mb-auto">
+                                    <h6><a asp-action="Category" asp-controller="Home" asp-route-slug="@cateP.Parent.Slug">@cateP.Parent.Name</a></h6>
+                                        <ul>
+                                    @foreach(var cateC in cateP.Children){
+                                            <li><a asp-action="Category" asp-controller="Home" asp-route-slug="@cateC.Slug" >@cateC.Name</a> </li>
+                                    }
+                                        </ul>
+                                </div>
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            @* <div class="alert alert-warning">Đang cập nhập</div> *@
+
+                        }
+
+                    </div>
+                </li>
+                <a class="nav-link">Tin tức</a>
+                <a class="nav-link">Liên hệ</a>
+                <a class="nav-link">Hệ thống cửa hàng</a>
+                <a class="nav-link">Đặt lịch tư vấn</a>
+            </nav>
+        </div>
+    </div>
+
+</header>

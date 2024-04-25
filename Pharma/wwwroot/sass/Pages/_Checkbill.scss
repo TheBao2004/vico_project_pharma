@@ -1,0 +1,127 @@
+.checkbill{
+    input, select, textarea{
+        border-radius: 0;
+        box-shadow: none;
+    }
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    .checkbill_left{
+        height: 100%;
+        padding: 30px;
+
+        .title_checkbill{
+
+            a{
+                text-decoration: none;
+                color: $color_blue;
+            }
+
+            .infor_user_checkbill{
+
+                .left_infor_user_checkbill{
+
+                    padding-left: 0;
+
+
+                }
+
+                .right_infor_user_checkbill{
+
+                    .input_transport_checkbill{
+                        border: 1px solid $color_gray_2;
+                        div{
+                            border-radius: 0;
+                            background-color: $color_white;
+                            border-color: transparent;
+                        }
+                        input[type="text"]{
+                            border-radius: 0;
+                            border-color: $color_white;
+                            text-align: end;
+                            &:disabled{
+                                background-color: white;
+                            }
+                        }
+                    }
+
+                    #div_pay_checkbill{
+                        border: 1px solid $color_gray_2;
+
+   .input_pay_checkbill{
+                        div{
+                            background-color: $color_white;
+                            border-color: transparent;
+                            border-radius: 0;
+                        }
+                        input[type="text"]{
+                            border-radius: 0;
+                            border-color: $color_white;
+                            text-align: end;
+                            &:disabled{
+                                background-color: white;
+                            }
+                        }
+
+                    }
+                        
+                    }
+                 
+
+                }
+
+            }
+
+        }
+
+
+
+
+    }
+
+    .checkbill_right{
+        height: 100%;
+
+            .title_checkbill_right{
+                font-size: 18px;
+                font-weight: 600;
+                padding: 20px;
+                border-bottom: 1px solid $color_gray_1;
+            }
+
+            .list_product_checkbill{
+
+                height: 300px;
+                overflow: auto;
+
+                padding: 20px 0;
+                .item_product_checkbill{
+                    display: flex;
+                    align-items: center;
+                    div{
+                        padding-left: 0;
+                    }
+                }
+
+            }
+
+            .apply_voucher_checkbill{
+
+                div{
+                    padding-left: 0;
+                }
+
+            }
+
+            .total_checkbill{
+
+                font-weight: 500;
+                font-size: 20px;
+
+            }
+
+    }
+
+
+}

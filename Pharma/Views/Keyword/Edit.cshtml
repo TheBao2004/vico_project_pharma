@@ -1,0 +1,59 @@
+@model Pharma.ViewModels.PageActionKeywordViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="alert alert-info">
+    Tạo mới
+</div>
+
+<a asp-action="Index" class="btn btn-info">Danh sách</a>
+
+<hr>
+
+<form method="post">
+
+        <input type="hidden" asp-for="Keyword.Id">
+
+        <div class="mb-3">
+        <label class="mb-2" asp-for="Keyword.Active"></label>
+        <select asp-for="Keyword.Active" class="form-select">
+            <option value="@(false)">Chưa kích hoạt</option>
+            <option value="@(true)">Kích hoạt</option>
+        </select>
+        <span class="text-danger" asp-validation-for="Keyword.Active"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="mb-2" asp-for="Keyword.Name"></label>
+        <input asp-for="Keyword.Name" class="form-control inputSlug">
+        <span class="text-danger" asp-validation-for="Keyword.Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="mb-2" asp-for="Keyword.Keyword"></label>
+        <input asp-for="Keyword.Keyword" class="form-control outputSlug">
+        <span class="text-danger" asp-validation-for="Keyword.Keyword"></span>
+    </div>
+
+        <div class="mb-3">
+        <label class="mb-2" asp-for="Keyword.CategoryId"></label>
+        <select asp-for="Keyword.CategoryId" class="form-select">
+            <option value="">Chọn danh mục</option>
+            @foreach(var x in Model.Categories){
+                <option value="@x.Id">@x.Name</option>
+            }
+        </select>
+        <span class="text-danger" asp-validation-for="Keyword.CategoryId"></span>
+    </div>
+
+    <div class="mb-3" style="text-align: end;">
+        <button type="submit" class="btn btn-info">Sửa</button>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

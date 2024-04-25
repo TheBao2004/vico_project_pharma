@@ -1,0 +1,23 @@
+@mixin btnNormal($color, $bg, $border, $colorAt,  $bgAt, $borderAt){
+
+    border: 1px solid $border;
+    color: $color;
+
+    border-radius: 56px;
+    background-color: $bg;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    cursor: pointer;
+    span{
+        margin-left: 10px;
+    }
+    &:hover{
+        border: 1px solid $borderAt;
+        color: $colorAt;
+        background-color: $bgAt;
+    }
+
+}

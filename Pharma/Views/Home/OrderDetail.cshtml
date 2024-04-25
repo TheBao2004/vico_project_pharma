@@ -1,0 +1,166 @@
+@using Pharma.Services
+
+@model Pharma.ViewModels.PageOrderDetailInfor
+
+@{
+    ViewData["Title"] = "OrderDetail";
+}
+
+
+
+<div class="account">
+
+    <div class="container">
+
+        <div class="row mx-0">
+
+            <div class="col-3">
+
+                @await Component.InvokeAsync("MenuInforComponent")
+
+            </div>
+
+
+            <div class="col-9 order_detail_account">
+
+                <h4>Chi tiết đơn hàng: #@Model.Order.OrderId</h4>
+
+                <div class="status_order_detail_account row mx-0 row-cols-3">
+                    <div>
+                        Trạng thái thanh toán:
+                        @if (Model.Order.Thanhtoan)
+                        {
+                            <span>Đã thanh toán</span>
+                        }
+                        else
+                        {
+                            <span>Chưa thanh toán</span>
+                        }
+                        <br>
+                        Mã đơn: <span>#@Model.Order.OrderId</span>
+                    </div>
+                    <div>
+                        Trạng thái vận chuyển:
+                        @if (Model.Order.State == 0)
+                        {
+                            <span>Đã hủy</span>
+                        }
+                        else if (Model.Order.State == 1)
+                        {
+                            <span>Đơn mới</span>
+                        }
+                        else if (Model.Order.State == 2)
+                        {
+                            <span>Đang sử lí</span>
+                        }
+                        else if (Model.Order.State == 3)
+                        {
+                            <span>Đang giao</span>
+                        }
+                        else if (Model.Order.State == 4)
+                        {
+                            <span>Đã giao</span>
+                        }
+                    </div>
+                    <div>
+                        Ngày tạo: <span>@Model.Order.OrderDate.ToString("d")</span>
+                    </div>
+                </div>
+
+
+                <div class="infor_order_detail_account">
+                    <div class="thongtin_order_detail_account row mx-0 ">
+
+                        <div class="col-6 item_order_detail_account">
+                            <h6>ĐỊA CHỈ GIAO HÀNG</h6>
+                            <div class="content_item_order_detail_account">
+                                <p class="person_order">@Model.Order.Username</p>
+                                <p>Địa chỉ: @Model.Order.Address, @Model.City.Name, @Model.District.Name,
+                                    @Model.Ward.Name</p>
+                                <p>Số điện thoại: @Model.Order.Phone</p>
+                            </div>
+                        </div>
+
+                        <div class="col-3 item_order_detail_account">
+                            <h6>THANH TOÁN</h6>
+                            <div class="content_item_order_detail_account">
+                                <p>
+                                    @if (Model.Order.Payment == 1)
+                                    {
+                                        <span>Tiền mặt</span>
+                                    }
+                                    else if (Model.Order.Payment == 2)
+                                    {
+                                        <span>Thánh toán online</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-3 item_order_detail_account">
+                            <h6>GHI CHÚ</h6>
+                            <div class="content_item_order_detail_account">
+                                @* <p>đặt để test chức năng, không mua hàng</p> *@
+                                <p>@Model.Order.Note</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="table_order_detail_account">
+
+                        <table class="table">
+
+                            <tr>
+                                <th width="55%">Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                            </tr>
+
+                            @foreach (var x in Model.Products)
+                            {
+
+                                <tr>
+                                    <td class="row mx-0">
+                                        <div class="col-3">
+                                            <img src="~/images/sp4-7b6a3229-2540-48cb-8c1c-8208.png" alt="" width="100%">
+                                        </div>
+                                        <div class="col-9">
+                                            <a href="">@x.Product.Name</a>
+                                        </div>
+                                    </td>
+                                    @* <td>@(int.Parse(Helper.IfOrElse(x.Product.Discount ?? 0,
+                                x.Product.Price)).ToString("N0")) ₫</td> *@
+                                    <td>@((x.Price).ToString("N0")) đ</td>
+                                    <td>@x.Quantity</td>
+                                    @* <td>@((int.Parse(Helper.IfOrElse(x.Product.Discount ?? 0, x.Product.Price)) *
+                                x.Quantity).ToString("N0")) ₫</td> *@
+                                    <td>@((x.Price * x.Quantity).ToString("N0")) đ</td>
+                                </tr>
+
+                            }
+
+                        </table>
+
+
+                        <div class="total_order_detail_account">
+                            @* <p><span>Khuyến mại</span> <span>0₫</span></p>
+                            <p><span>Phí vận chuyển </span> <span>0₫</span></p> *@
+                            <p><span>Tổng tiền</span> <span class="total_order">@Model.Order.Total.ToString("N0")
+                                    đ</span></p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

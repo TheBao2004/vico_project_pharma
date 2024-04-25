@@ -1,0 +1,97 @@
+@model Pharma.ViewModels.PageAddress
+
+
+    <div class="modal-dialog-centered modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="EditAddressLabel">SỬA ĐỊA CHỈ</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form asp-action="UpdateAddressInfor" class="row mx-0" method="post" id="form_EditAddress">
+
+                    <input type="hidden" name="id_edit" asp-for="Address.Id">
+
+                    <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="fullname_edit" asp-for="@Model.Address.Name" placeholder="Họ tên">
+                        @* <span class="text-danger" asp-validation-for="@Model.Address.Name"></span> *@
+                    </div>
+
+                    <div class="mb-3 col-12">
+                        <input type="text" name="phone_edit" class="form-control" asp-for="@Model.Address.Phone"placeholder="Số điện thoại">
+                        @* <span class="text-danger" asp-validation-for="@Model.Address.Phone"></span> *@
+                    </div>
+
+                    @* <div class="mb-3 col-12">
+                        <input type="text" class="form-control" name="email" placeholder="Email">
+                    </div> *@
+
+                    <div class="mb-3 col-12">
+                        <input type="text" name="address_edit" class="form-control"asp-for="@Model.Address.Address" placeholder="Địa chỉ">
+                        @* <span class="text-danger" asp-validation-for="@Model.Address.Address"></span> *@
+                    </div>
+
+                    @* <div class="mb-3 col-12">
+                    <select name="nation" id="" class="form-select">
+                    <option value="">Chọn quốc gia</option>
+                    </select>
+                    </div> *@
+
+                    <div class="mb-3 col-4">
+                        <select name="city_edit" id="pharma_city_edit" asp-for="@Model.Address.CityId" class="form-select">
+                            <option value="">Chọn thành phố</option>
+                            @foreach (var x in Model.Cities)
+                            {
+                                <option value="@x.Id">@x.Name</option>
+                            }
+                        </select>
+                        @* <span class="text-danger" asp-validation-for="@Model.Address.CityId"></span> *@
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <select name="district_edit" id="pharma_district_edit" asp-for="@Model.Address.DistrictId" class="form-select">
+                            <option value="">Chọn huyện</option>
+                            @foreach (var x in Model.Districts)
+                            {
+                                <option value="@x.Id">@x.Name</option>
+                            }
+                        </select>
+                        @* <span class="text-danger" asp-validation-for="@Model.Address.DistrictId"></span> *@
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <select name="ward_edit" id="pharma_ward_edit" class="form-select" asp-for="@Model.Address.WardId">
+                            <option value="">Chọn xã</option>
+                            @foreach (var x in Model.Wards)
+                            {
+                                <option value="@x.ID">@x.Name</option>
+                            }
+                        </select>
+                        @* <span class="text-danger" asp-validation-for="@Model.Address.WardId"></span> *@
+                    </div>
+
+
+                    @* <div class="mb-3 col-12">
+                    <input type="text" class="form-control" name="zip" placeholder="Mã zip">
+                    </div> *@
+
+                    <div class="mb-3 col-12 d-flex justify-content-between">
+                        <div>
+                            <input type="checkbox" name="default_edit" asp-for="@Model.Address.Default">
+                            <label for="" class="ml-3">Đặt làm địa chỉ mặc định</label>
+                        </div>
+                        <div>
+                            <button class="btn btn-success">Sửa địa chỉ</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
